@@ -95,48 +95,55 @@ const DEGREE_OPTIONS = [
   { id: "certificate", label: "Certificate", icon: "📋" },
 ];
 
-function getRecommendations({ identity, location, interests, career }) {
+function getRecommendations({ identity, location, interests, career, gradYear }) {
   const recs = [];
+
+  // Class year page (2022–2025)
+  const yr = parseInt(gradYear);
+  if (yr >= 2022 && yr <= 2025) {
+    recs.push({ name: `Class of ${gradYear}`, url: `https://alumni.ucla.edu/class-of-${gradYear}/`, desc: `Your class page — events, updates, and connections for the Class of ${gradYear}.`, tag: "your class", icon: "🎓" });
+  }
+
   const IN = {
-    black: { name: "Black Alumni Association", url: "https://alumni.ucla.edu/events-calendar/category/black-alumni-association", desc: "Events, networking, and cultural celebrations with the BAA community.", tag: "identity network", icon: "✊🏿" },
-    latino: { name: "Latino Alumni Association", url: "https://alumni.ucla.edu/events-calendar/category/latino-alumni-association", desc: "Community events, EmPower Hour book talks, and cultural programming.", tag: "identity network", icon: "🌎" },
-    asian_pacific: { name: "Asian Pacific Alumni", url: "https://alumni.ucla.edu/events-calendar/category/asian-pacific-alumni", desc: "Networking and cultural events for Asian and Pacific Islander Bruins.", tag: "identity network", icon: "🌏" },
-    pilipino: { name: "Pilipino Alumni Association", url: "https://alumni.ucla.edu/events-calendar/category/pilipino-alumni-association", desc: "Events and mentorship with the Pilipino Bruin community.", tag: "identity network", icon: "🇵🇭" },
-    american_indian: { name: "American Indian Alumni", url: "https://alumni.ucla.edu/events-calendar/category/american-indian-alumni", desc: "Cultural events and community programming for Indigenous Bruins.", tag: "identity network", icon: "🪶" },
-    mixed: { name: "Mixed Alumni Association", url: "https://alumni.ucla.edu/events-calendar/category/mixed-alumni-association", desc: "Community for multiracial and mixed-heritage Bruins.", tag: "identity network", icon: "🤝" },
-    lgbtq: { name: "Lambda Alumni Association", url: "https://alumni.ucla.edu/events-calendar/category/lambda", desc: "Social events, pride celebrations, and community building for LGBTQ+ Bruins.", tag: "identity network", icon: "🏳️‍🌈" },
-    muslim: { name: "Muslim Alumni Association", url: "https://alumni.ucla.edu/events-calendar/category/muslim-alumni-association", desc: "Faith-based and cultural community programming for Muslim Bruins.", tag: "identity network", icon: "☪️" },
-    first_gen: { name: "First Gen Alumni Network", url: "https://alumni.ucla.edu/events-calendar/category/first-gen-alumni", desc: "Mentorship, resources, and community for first-generation grads.", tag: "identity network", icon: "⭐" },
-    transfer: { name: "Transfer Student Alumni Network", url: "https://alumni.ucla.edu/events-calendar/category/transfer-student-alumni-network", desc: "Connect with Bruins who share your transfer journey.", tag: "identity network", icon: "🔄" },
-    undocumented: { name: "Undocumented Alumni Association", url: "https://alumni.ucla.edu/events-calendar/category/undocumented-alumni-association", desc: "A supportive network for undocumented and DACAmented Bruins.", tag: "identity network", icon: "💛" },
-    veteran: { name: "VetNet", url: "https://alumni.ucla.edu/events-calendar/category/vetnet", desc: "Career resources, community events, and networking for Bruin veterans.", tag: "identity network", icon: "🎖️" },
-    disability: { name: "Disability Alumni Network", url: "https://alumni.ucla.edu/events-calendar/category/disability-alumni-network", desc: "Advocacy and connection for Bruins in the disability community.", tag: "identity network", icon: "♿" },
-    grad_professional: { name: "Graduate & Professional Student Alumni", url: "https://alumni.ucla.edu/events-calendar/category/graduate-and-professional-student-alumni-gpsa-network", desc: "Networking tailored to graduate and professional degree holders.", tag: "identity network", icon: "🎓" },
+    black: { name: "Black Alumni Association", url: "https://alumni.ucla.edu/diversity-programs-and-initiatives/#baa", desc: "Events, networking, and cultural celebrations with the BAA community.", tag: "identity network", icon: "✊🏿" },
+    latino: { name: "Latino Alumni Association", url: "https://alumni.ucla.edu/diversity-programs-and-initiatives/#laa", desc: "Community events, EmPower Hour book talks, and cultural programming.", tag: "identity network", icon: "🌎" },
+    asian_pacific: { name: "Asian Pacific Alumni", url: "https://alumni.ucla.edu/diversity-programs-and-initiatives/#apa", desc: "Networking and cultural events for Asian and Pacific Islander Bruins.", tag: "identity network", icon: "🌏" },
+    pilipino: { name: "Pilipino Alumni Association", url: "https://alumni.ucla.edu/diversity-programs-and-initiatives/#paa", desc: "Events and mentorship with the Pilipino Bruin community.", tag: "identity network", icon: "🇵🇭" },
+    american_indian: { name: "American Indian Alumni", url: "https://alumni.ucla.edu/diversity-programs-and-initiatives/#aia", desc: "Cultural events and community programming for Indigenous Bruins.", tag: "identity network", icon: "🪶" },
+    mixed: { name: "Mixed Alumni Association", url: "https://alumni.ucla.edu/diversity-programs-and-initiatives/#maa", desc: "Community for multiracial and mixed-heritage Bruins.", tag: "identity network", icon: "🤝" },
+    lgbtq: { name: "Lambda Alumni Association", url: "https://alumni.ucla.edu/diversity-programs-and-initiatives/#lambda", desc: "Social events, pride celebrations, and community building for LGBTQ+ Bruins.", tag: "identity network", icon: "🏳️‍🌈" },
+    muslim: { name: "Muslim Alumni Association", url: "https://alumni.ucla.edu/diversity-programs-and-initiatives/#muslim", desc: "Faith-based and cultural community programming for Muslim Bruins.", tag: "identity network", icon: "☪️" },
+    first_gen: { name: "First Gen Alumni Network", url: "https://alumni.ucla.edu/diversity-programs-and-initiatives/#firstgen", desc: "Mentorship, resources, and community for first-generation grads.", tag: "identity network", icon: "⭐" },
+    transfer: { name: "Transfer Student Alumni Network", url: "https://alumni.ucla.edu/diversity-programs-and-initiatives/#transfer", desc: "Connect with Bruins who share your transfer journey.", tag: "identity network", icon: "🔄" },
+    undocumented: { name: "Undocumented Alumni Association", url: "https://alumni.ucla.edu/diversity-programs-and-initiatives/#undocumented", desc: "A supportive network for undocumented and DACAmented Bruins.", tag: "identity network", icon: "💛" },
+    veteran: { name: "VetNet", url: "https://alumni.ucla.edu/diversity-programs-and-initiatives/#vetnet", desc: "Career resources, community events, and networking for Bruin veterans.", tag: "identity network", icon: "🎖️" },
+    disability: { name: "Disability Alumni Network", url: "https://alumni.ucla.edu/diversity-programs-and-initiatives/#disability", desc: "Advocacy and connection for Bruins in the disability community.", tag: "identity network", icon: "♿" },
+    grad_professional: { name: "Graduate & Professional Student Alumni", url: "https://alumni.ucla.edu/diversity-programs-and-initiatives/#gpsa", desc: "Networking tailored to graduate and professional degree holders.", tag: "identity network", icon: "🎓" },
   };
   identity.forEach((id) => { if (IN[id]) recs.push(IN[id]); });
 
   const LN = {
-    la_westside: { name: "LA Westside Network", url: "https://alumni.ucla.edu/events-calendar/category/la-westside" },
-    la_downtown: { name: "LA Downtown Network", url: "https://alumni.ucla.edu/events-calendar/category/los-angeles-downtown" },
-    la_southeast: { name: "LA Southeast Network", url: "https://alumni.ucla.edu/events-calendar/category/los-angeles-southeast" },
-    san_fernando: { name: "San Fernando Valley Network", url: "https://alumni.ucla.edu/events-calendar/category/san-fernando-valley-regional-networks" },
-    south_bay: { name: "South Bay Network", url: "https://alumni.ucla.edu/events-calendar/category/south-bay" },
-    beachside: { name: "Beachside Network", url: "https://alumni.ucla.edu/events-calendar/category/beachside" },
-    century_city: { name: "Century City Network", url: "https://alumni.ucla.edu/events-calendar/category/century-city" },
-    orange_county: { name: "Orange County Network", url: "https://alumni.ucla.edu/events-calendar/category/orange-county-regional-networks" },
-    inland_empire: { name: "Inland Empire Network", url: "https://alumni.ucla.edu/events-calendar/category/inland-empire-regional-networks" },
-    san_diego: { name: "San Diego Network", url: "https://alumni.ucla.edu/events-calendar/category/san-diego" },
-    bay_area: { name: "Bay Area Network", url: "https://alumni.ucla.edu/events-calendar/category/bay-area-regional-networks" },
-    sacramento: { name: "Sacramento Network", url: "https://alumni.ucla.edu/events-calendar/category/sacramento-regional-networks" },
-    seattle: { name: "Seattle Network", url: "https://alumni.ucla.edu/events-calendar/category/seattle-regional-networks" },
-    colorado: { name: "Colorado Network", url: "https://alumni.ucla.edu/events-calendar/category/colorado" },
-    arizona: { name: "Arizona Network", url: "https://alumni.ucla.edu/events-calendar/category/arizona" },
-    ny_tristate: { name: "New York Tri-State Network", url: "https://alumni.ucla.edu/events-calendar/category/new-york-tri-state-regional-networks" },
-    dc: { name: "Washington D.C. Network", url: "https://alumni.ucla.edu/events-calendar/category/washington-d-c-regional-networks" },
-    chicago: { name: "Chicago Network", url: "https://alumni.ucla.edu/events-calendar/category/chicago" },
-    atlanta: { name: "Atlanta Network", url: "https://alumni.ucla.edu/events-calendar/category/atlanta" },
-    dallas: { name: "Dallas-Fort Worth Network", url: "https://alumni.ucla.edu/events-calendar/category/dallas-fort-worth" },
-    hawaii: { name: "Hawaii Network", url: "https://alumni.ucla.edu/events-calendar/category/hawaii" },
+    la_westside: { name: "LA Westside Network", url: "https://alumni.ucla.edu/alumni-networks/#la-westside" },
+    la_downtown: { name: "LA Downtown Network", url: "https://alumni.ucla.edu/alumni-networks/#la-downtown" },
+    la_southeast: { name: "LA Southeast Network", url: "https://alumni.ucla.edu/alumni-networks/#la-southeast" },
+    san_fernando: { name: "San Fernando Valley Network", url: "https://alumni.ucla.edu/alumni-networks/#san-fernando-valley" },
+    south_bay: { name: "South Bay Network", url: "https://alumni.ucla.edu/alumni-networks/#south-bay" },
+    beachside: { name: "Beachside Network", url: "https://alumni.ucla.edu/alumni-networks/#beachside" },
+    century_city: { name: "Century City Network", url: "https://alumni.ucla.edu/alumni-networks/#century-city" },
+    orange_county: { name: "Orange County Network", url: "https://alumni.ucla.edu/alumni-networks/#orange-county" },
+    inland_empire: { name: "Inland Empire Network", url: "https://alumni.ucla.edu/alumni-networks/#inland-empire" },
+    san_diego: { name: "San Diego Network", url: "https://alumni.ucla.edu/alumni-networks/#san-diego" },
+    bay_area: { name: "Bay Area Network", url: "https://alumni.ucla.edu/alumni-networks/#bay-area" },
+    sacramento: { name: "Sacramento Network", url: "https://alumni.ucla.edu/alumni-networks/#sacramento" },
+    seattle: { name: "Seattle Network", url: "https://alumni.ucla.edu/alumni-networks/#seattle" },
+    colorado: { name: "Colorado Network", url: "https://alumni.ucla.edu/alumni-networks/#colorado" },
+    arizona: { name: "Arizona Network", url: "https://alumni.ucla.edu/alumni-networks/#arizona" },
+    ny_tristate: { name: "New York Tri-State Network", url: "https://alumni.ucla.edu/alumni-networks/#new-york-tri-state" },
+    dc: { name: "Washington D.C. Network", url: "https://alumni.ucla.edu/alumni-networks/#washington-dc" },
+    chicago: { name: "Chicago Network", url: "https://alumni.ucla.edu/alumni-networks/#chicago" },
+    atlanta: { name: "Atlanta Network", url: "https://alumni.ucla.edu/alumni-networks/#atlanta" },
+    dallas: { name: "Dallas-Fort Worth Network", url: "https://alumni.ucla.edu/alumni-networks/#dallas-fort-worth" },
+    hawaii: { name: "Hawaii Network", url: "https://alumni.ucla.edu/alumni-networks/#hawaii" },
   };
   if (LN[location]) recs.push({ ...LN[location], desc: "Your local Bruin hub — game watches, networking nights, and community events near you.", tag: "regional network", icon: "📍" });
 
@@ -413,7 +420,7 @@ export default function UCLAAlumChatbot() {
     else setter(current.includes(id) ? current.filter((i) => i !== id) : [...current.filter((i) => i !== "none"), id]);
   };
 
-  const results = step === STEPS.RESULTS ? getRecommendations({ identity, location, interests, career }) : [];
+  const results = step === STEPS.RESULTS ? getRecommendations({ identity, location, interests, career, gradYear }) : [];
   const lastUser = history[history.length - 1]?.user;
 
   return (
@@ -569,6 +576,21 @@ export default function UCLAAlumChatbot() {
                 <button onClick={() => { setStep(STEPS.WELCOME); setName(""); setGradYear(""); setDegree(""); setIdentity([]); setLocation(""); setInterests([]); setCareer(""); setHistory([]); }}
                   style={{ padding: "11px 20px", borderRadius: 6, border: "2px solid #D4D9E1", background: COLORS.white, fontSize: 13, fontFamily: "'Inter', sans-serif", cursor: "pointer", color: "#718096", fontWeight: 500 }}>↺ start over</button>
               </div>
+              <a href="https://account.alumni.ucla.edu/" target="_blank" rel="noopener noreferrer"
+                style={{
+                  display: "flex", alignItems: "center", gap: 10,
+                  marginTop: 16, padding: "14px 18px",
+                  background: COLORS.uclaGold, borderRadius: 8,
+                  textDecoration: "none", color: COLORS.black,
+                  transition: "all 0.2s ease",
+                }}>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#003B5C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                <div>
+                  <div style={{ fontSize: 14, fontWeight: 700, color: COLORS.darkestBlue }}>update your alumni information</div>
+                  <div style={{ fontSize: 12, color: COLORS.darkerBlue, marginTop: 1 }}>Keep your profile current at the UCLA Alumni portal</div>
+                </div>
+                <span style={{ marginLeft: "auto", fontSize: 16, color: COLORS.darkestBlue }}>→</span>
+              </a>
             </BotMessage>
           </>
         )}
@@ -582,3 +604,4 @@ export default function UCLAAlumChatbot() {
     </div>
   );
 }
+
