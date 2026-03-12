@@ -117,21 +117,48 @@ const DEGREE_OPTIONS = [
 
 const SCHOOL_OPTIONS = [
   { id: "none_school", label: "Skip / Not listed", icon: "—", group: "" },
-  { id: "anderson", label: "Anderson School of Management", icon: "📊", group: "school", url: "https://alumni.ucla.edu/alumni-networks/anderson-network/" },
-  { id: "dentistry", label: "School of Dentistry", icon: "🦷", group: "school", url: "https://alumni.ucla.edu/alumni-networks/dentistry-network/" },
-  { id: "education", label: "Education & Information Studies", icon: "📖", group: "school", url: "https://alumni.ucla.edu/alumni-networks/education-and-information-studies-alumni-network/" },
-  { id: "engineering", label: "Samueli School of Engineering", icon: "⚙️", group: "school", url: "https://alumni.ucla.edu/alumni-networks/engineering-network/" },
-  { id: "law", label: "School of Law", icon: "⚖️", group: "school", url: "https://alumni.ucla.edu/alumni-networks/law-network/" },
-  { id: "medicine", label: "David Geffen School of Medicine", icon: "🩺", group: "school", url: "https://alumni.ucla.edu/alumni-networks/medical-alumni-network/" },
-  { id: "public_health", label: "Fielding School of Public Health", icon: "🏥", group: "school", url: "https://alumni.ucla.edu/alumni-networks/public-health-network/" },
+  // ── Graduate & Professional Schools ──
+  { id: "anderson", label: "Anderson School of Management", icon: "📊", group: "school", url: "https://www.anderson.ucla.edu/alumni" },
+  { id: "dentistry", label: "School of Dentistry", icon: "🦷", group: "school", url: "https://dentistry.ucla.edu/resources/alumni" },
+  { id: "education", label: "Education & Information Studies", icon: "📖", group: "school", url: "https://seis.ucla.edu/about/alumni/" },
+  { id: "engineering", label: "Samueli School of Engineering", icon: "⚙️", group: "school", url: "https://samueli.ucla.edu/alumni/" },
+  { id: "law", label: "School of Law", icon: "⚖️", group: "school", url: "https://law.ucla.edu/alumni-giving/ways-connect/alumni-association" },
+  { id: "medicine", label: "David Geffen School of Medicine", icon: "🩺", group: "school", url: "https://medschool.ucla.edu/groups/alumni-affairs-office" },
+  { id: "nursing", label: "School of Nursing", icon: "💉", group: "school", url: "https://nursing.ucla.edu/alumni/" },
+  { id: "public_affairs", label: "Luskin School of Public Affairs", icon: "🏛️", group: "school", url: "https://luskin.ucla.edu/alumni/" },
+  { id: "public_health", label: "Fielding School of Public Health", icon: "🏥", group: "school", url: "https://ph.ucla.edu/alumni/public-health-alumni-association" },
+  { id: "social_welfare", label: "Luskin School of Social Welfare", icon: "🤲", group: "school", url: "https://luskin.ucla.edu/social-welfare/alumni/" },
   { id: "tft", label: "Theater, Film & Television", icon: "🎬", group: "school", url: "https://www.tft.ucla.edu/alumni/" },
-  { id: "chemistry", label: "Chemistry & Biochemistry", icon: "🧪", group: "dept", url: "https://alumni.ucla.edu/alumni-networks/chemistry-and-biochemistry-network/" },
-  { id: "earth_space", label: "Earth & Space Sciences", icon: "🌍", group: "dept", url: "https://alumni.ucla.edu/alumni-networks/earth-and-space-sciences-network/" },
-  { id: "english", label: "English", icon: "✍️", group: "dept", url: "https://alumni.ucla.edu/alumni-networks/english-network/" },
-  { id: "health_policy", label: "Health Policy & Management", icon: "📋", group: "dept", url: "https://alumni.ucla.edu/alumni-networks/health-policy-and-management-network/" },
-  { id: "math", label: "Mathematics", icon: "📐", group: "dept", url: "https://alumni.ucla.edu/alumni-networks/mathematics-network/" },
-  { id: "physics", label: "Physics & Astronomy", icon: "🔭", group: "dept", url: "https://alumni.ucla.edu/alumni-networks/physics-and-astronomy-network/" },
-  { id: "psychology", label: "Psychology", icon: "🧠", group: "dept", url: "https://alumni.ucla.edu/alumni-networks/psychology-network/" },
+  { id: "arts_architecture", label: "Arts & Architecture", icon: "🏗️", group: "school", url: "https://alumni.ucla.edu/alumni-networks/arts-and-architecture-network/" },
+  // ── College Departments ──
+  { id: "anthropology", label: "Anthropology", icon: "🏺", group: "dept", url: "https://www.anthro.ucla.edu/about/alumni" },
+  { id: "art_history", label: "Art History", icon: "🖼️", group: "dept", url: "https://arthistory.ucla.edu/alumni/" },
+  { id: "asian_languages", label: "Asian Languages & Cultures", icon: "🀄", group: "dept", url: "https://alc.ucla.edu/alumni/" },
+  { id: "chemistry", label: "Chemistry & Biochemistry", icon: "🧪", group: "dept", url: "https://www.chemistry.ucla.edu/alumni/" },
+  { id: "classics", label: "Classics", icon: "🏛️", group: "dept", url: "https://classics.ucla.edu/alumni/" },
+  { id: "communication", label: "Communication", icon: "📡", group: "dept", url: "https://comm.ucla.edu/alumni/" },
+  { id: "comparative_lit", label: "Comparative Literature", icon: "📚", group: "dept", url: "https://complit.ucla.edu/alumni/" },
+  { id: "earth_space", label: "Earth, Planetary & Space Sciences", icon: "🌍", group: "dept", url: "https://epss.ucla.edu/alumni/" },
+  { id: "economics", label: "Economics", icon: "📈", group: "dept", url: "https://economics.ucla.edu/alumni/" },
+  { id: "english", label: "English", icon: "✍️", group: "dept", url: "https://english.ucla.edu/alumni/" },
+  { id: "ethnomusicology", label: "Ethnomusicology", icon: "🎵", group: "dept", url: "https://ethnomusicology.ucla.edu/alumni/" },
+  { id: "geography", label: "Geography", icon: "🗺️", group: "dept", url: "https://geography.ucla.edu/alumni/" },
+  { id: "global_studies", label: "Global Studies", icon: "🌐", group: "dept", url: "https://global.ucla.edu/alumni/" },
+  { id: "health_policy", label: "Health Policy & Management", icon: "📋", group: "dept", url: "https://ph.ucla.edu/departments/health-policy-management/alumni" },
+  { id: "history", label: "History", icon: "📜", group: "dept", url: "https://history.ucla.edu/alumni/" },
+  { id: "ling", label: "Linguistics", icon: "💬", group: "dept", url: "https://linguistics.ucla.edu/alumni/" },
+  { id: "math", label: "Mathematics", icon: "📐", group: "dept", url: "https://ww3.math.ucla.edu/alumni/" },
+  { id: "microbiology", label: "Microbiology, Immunology & Molecular Genetics", icon: "🦠", group: "dept", url: "https://www.mimg.ucla.edu/alumni/" },
+  { id: "molecular_bio", label: "Molecular, Cell & Developmental Biology", icon: "🧬", group: "dept", url: "https://mcdb.ucla.edu/alumni/" },
+  { id: "music", label: "Music", icon: "🎼", group: "dept", url: "https://schoolofmusic.ucla.edu/alumni/" },
+  { id: "neuroscience", label: "Neuroscience", icon: "🧠", group: "dept", url: "https://www.neuroscience.ucla.edu/alumni/" },
+  { id: "philosophy", label: "Philosophy", icon: "🤔", group: "dept", url: "https://philosophy.ucla.edu/alumni/" },
+  { id: "physics", label: "Physics & Astronomy", icon: "🔭", group: "dept", url: "https://www.physics.ucla.edu/alumni/" },
+  { id: "political_science", label: "Political Science", icon: "🗳️", group: "dept", url: "https://polisci.ucla.edu/alumni/" },
+  { id: "psychology", label: "Psychology", icon: "🧪", group: "dept", url: "https://www.psych.ucla.edu/alumni/" },
+  { id: "sociology", label: "Sociology", icon: "👥", group: "dept", url: "https://soc.ucla.edu/alumni/" },
+  { id: "statistics", label: "Statistics & Data Science", icon: "📊", group: "dept", url: "https://statistics.ucla.edu/alumni/" },
+  { id: "world_arts", label: "World Arts & Cultures / Dance", icon: "💃", group: "dept", url: "https://www.wacd.ucla.edu/alumni/" },
 ];
 
 const INVOLVEMENT_OPTIONS = [
@@ -507,6 +534,112 @@ function downloadResultsPDF(name, gradYear, results) {
   }
 }
 
+// ─── DEPARTMENT DROPDOWN ───
+function DeptDropdown({ school, setSchool }) {
+  const [query, setQuery] = useState("");
+  const [open, setOpen] = useState(false);
+  const depts = SCHOOL_OPTIONS.filter(o => o.group === "dept");
+  const filtered = query.trim()
+    ? depts.filter(o => o.label.toLowerCase().includes(query.toLowerCase()))
+    : depts;
+  const selected = depts.find(o => o.id === school);
+  const ref = useRef(null);
+
+  useEffect(() => {
+    function handleClick(e) { if (ref.current && !ref.current.contains(e.target)) setOpen(false); }
+    document.addEventListener("mousedown", handleClick);
+    return () => document.removeEventListener("mousedown", handleClick);
+  }, []);
+
+  return (
+    <div ref={ref} style={{ position: "relative", maxWidth: 520 }}>
+      <div
+        onClick={() => setOpen(!open)}
+        style={{
+          display: "flex", alignItems: "center", justifyContent: "space-between",
+          padding: "11px 13px", borderRadius: 8, cursor: "pointer",
+          border: selected ? `2px solid ${COLORS.goldBorder}` : "2px solid #D4D9E1",
+          background: selected ? COLORS.goldTint : COLORS.white,
+          fontSize: 13, fontFamily: "'Inter', sans-serif",
+          color: selected ? COLORS.darkestBlue : "#718096",
+          fontWeight: selected ? 600 : 400, transition: "all 0.15s ease",
+          userSelect: "none",
+        }}>
+        <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
+          {selected ? (
+            <><span style={{ fontSize: 15 }}>{selected.icon}</span><span>{selected.label}</span></>
+          ) : (
+            <span>Search departments…</span>
+          )}
+        </span>
+        <span style={{ fontSize: 10, color: "#A0AEC0", marginLeft: 8 }}>{open ? "▲" : "▼"}</span>
+      </div>
+      {open && (
+        <div style={{
+          position: "absolute", zIndex: 100, top: "calc(100% + 4px)", left: 0, right: 0,
+          background: COLORS.white, border: "2px solid #D4D9E1", borderRadius: 8,
+          boxShadow: "0 8px 24px rgba(0,0,0,0.10)", overflow: "hidden",
+        }}>
+          <div style={{ padding: "8px 10px", borderBottom: "1px solid #EDF2F7" }}>
+            <input
+              autoFocus
+              type="text"
+              placeholder="Type to filter…"
+              value={query}
+              onChange={e => setQuery(e.target.value)}
+              style={{
+                width: "100%", padding: "8px 10px", borderRadius: 6,
+                border: "1px solid #D4D9E1", fontSize: 13,
+                fontFamily: "'Inter', sans-serif", outline: "none",
+              }} />
+          </div>
+          <div style={{ maxHeight: 240, overflowY: "auto" }}>
+            {filtered.length === 0 && (
+              <div style={{ padding: "12px 14px", fontSize: 13, color: "#A0AEC0", fontFamily: "'Inter', sans-serif" }}>No results</div>
+            )}
+            {filtered.map(opt => {
+              const isSelected = school === opt.id;
+              return (
+                <div
+                  key={opt.id}
+                  onClick={() => { setSchool(isSelected ? "" : opt.id); setOpen(false); setQuery(""); }}
+                  style={{
+                    display: "flex", alignItems: "center", gap: 10,
+                    padding: "10px 14px", cursor: "pointer", fontSize: 13,
+                    fontFamily: "'Inter', sans-serif",
+                    background: isSelected ? COLORS.goldTint : "transparent",
+                    color: isSelected ? COLORS.darkestBlue : "#2D3748",
+                    fontWeight: isSelected ? 600 : 400,
+                    borderLeft: isSelected ? `3px solid ${COLORS.uclaGold}` : "3px solid transparent",
+                    transition: "background 0.1s",
+                  }}
+                  onMouseEnter={e => { if (!isSelected) e.currentTarget.style.background = "#F7FAFC"; }}
+                  onMouseLeave={e => { if (!isSelected) e.currentTarget.style.background = "transparent"; }}>
+                  <span style={{ fontSize: 16, flexShrink: 0 }}>{opt.icon}</span>
+                  <span>{opt.label}</span>
+                  {isSelected && <span style={{ marginLeft: "auto", fontSize: 12, color: COLORS.uclaBlue }}>✓</span>}
+                </div>
+              );
+            })}
+          </div>
+          {selected && (
+            <div
+              onClick={() => { setSchool(""); setOpen(false); setQuery(""); }}
+              style={{
+                padding: "9px 14px", borderTop: "1px solid #EDF2F7",
+                fontSize: 12, color: "#A0AEC0", cursor: "pointer",
+                fontFamily: "'Inter', sans-serif",
+                textAlign: "center",
+              }}>
+              ✕ clear selection
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
 // ─── MAIN ───
 function UCLAAlumChatbot() {
   const [step, setStep] = useState(STEPS.WELCOME);
@@ -533,28 +666,60 @@ function UCLAAlumChatbot() {
   const results = step === STEPS.RESULTS ? getRecommendations({ identity, location, interests, involvement, career, gradYear, school }) : [];
   const lastUser = history[history.length - 1]?.user;
 
+  // Progress bar
+  const STEP_ORDER = ["welcome","name","grad_year","degree","school","identity","location","interests","involvement","career","results"];
+  const stepIndex = STEP_ORDER.indexOf(step);
+  const progress = step === "welcome" ? 0 : step === "results" ? 100 : Math.round((stepIndex / (STEP_ORDER.length - 1)) * 100);
+  const PROGRESS_LABELS = { welcome: "", name: "Getting to know you", grad_year: "Getting to know you", degree: "Academic background", school: "Academic background", identity: "Your community", location: "Your community", interests: "Your interests", involvement: "Your UCLA story", career: "Almost there", results: "" };
+  const progressLabel = PROGRESS_LABELS[step] || "";
+
+  // Auto-select mixed when 2+ ethnic identities selected
+  const ethnicIds = ["black","latino","asian_pacific","pilipino","american_indian","lgbtq","muslim","jewish","undocumented"];
+  const selectedEthnicCount = identity.filter(id => ethnicIds.includes(id)).length;
+  useEffect(() => {
+    if (selectedEthnicCount >= 2 && !identity.includes("mixed")) {
+      setIdentity(prev => [...prev, "mixed"]);
+    }
+  }, [selectedEthnicCount]);
+
   return (
-    <div style={{ width: "100%", maxWidth: 640, margin: "0 auto", height: "100vh", display: "flex", flexDirection: "column", fontFamily: "'Inter', 'Helvetica Neue', system-ui, sans-serif", background: COLORS.white }}>
+    <div style={{ width: "100%", maxWidth: 640, margin: "0 auto", height: "100vh", display: "flex", flexDirection: "column", fontFamily: "'Inter', 'Helvetica Neue', system-ui, sans-serif", background: "#FAFBFD" }}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
         @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes slideRight { from { opacity: 0; transform: translateX(16px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes shimmer { 0% { background-position: -200px 0; } 100% { background-position: 200px 0; } }
         input::placeholder { color: #A0AEC0; }
+        input:focus { border-color: ${COLORS.uclaBlue} !important; }
         * { box-sizing: border-box; }
         ::-webkit-scrollbar { width: 4px; }
         ::-webkit-scrollbar-thumb { background: ${COLORS.lighterBlue}; border-radius: 4px; }
       `}</style>
 
-      {/* Header */}
-      <div style={{ background: COLORS.white, padding: "14px 20px", borderBottom: `3px solid ${COLORS.uclaBlue}`, display: "flex", alignItems: "center", justifyContent: "space-between", flexShrink: 0 }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-          <span style={{ fontSize: 24 }}>🐻</span>
-          <div>
-            <div style={{ fontSize: 18, fontWeight: 700, color: COLORS.black, letterSpacing: "-0.02em", lineHeight: 1.1, textTransform: "lowercase" }}>bruin connect</div>
-            <div style={{ fontSize: 11, color: "#718096", fontWeight: 400, marginTop: 1 }}>find your alumni community</div>
+      {/* Header with progress */}
+      <div style={{ flexShrink: 0 }}>
+        <div style={{ background: COLORS.white, padding: "12px 20px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+            <span style={{ fontSize: 22 }}>🐻</span>
+            <div>
+              <div style={{ fontSize: 17, fontWeight: 700, color: COLORS.darkestBlue, letterSpacing: "-0.02em", lineHeight: 1.1, textTransform: "lowercase" }}>bruin connect</div>
+              <div style={{ fontSize: 10, color: "#8896A6", fontWeight: 500, marginTop: 2, letterSpacing: "0.02em" }}>alumni network finder</div>
+            </div>
           </div>
+          <UCLAAlumLogo size="small" />
         </div>
-        <UCLAAlumLogo size="small" />
+        {step !== "welcome" && step !== "results" && (
+          <div style={{ padding: "0 20px 10px 20px", background: COLORS.white }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 5 }}>
+              <span style={{ fontSize: 10, fontWeight: 600, color: COLORS.darkerBlue, textTransform: "uppercase", letterSpacing: "0.06em" }}>{progressLabel}</span>
+              <span style={{ fontSize: 10, fontWeight: 600, color: COLORS.lighterBlue }}>{progress}%</span>
+            </div>
+            <div style={{ height: 3, background: "#E8EDF2", borderRadius: 3, overflow: "hidden" }}>
+              <div style={{ height: "100%", width: `${progress}%`, background: `linear-gradient(90deg, ${COLORS.uclaBlue}, ${COLORS.lighterBlue})`, borderRadius: 3, transition: "width 0.5s cubic-bezier(0.22, 1, 0.36, 1)" }} />
+            </div>
+          </div>
+        )}
+        <div style={{ height: 1, background: step === "welcome" || step === "results" ? `${COLORS.uclaBlue}` : "transparent" }} />
       </div>
 
       {/* Chat */}
@@ -562,12 +727,16 @@ function UCLAAlumChatbot() {
 
         {step === STEPS.WELCOME && (
           <BotMessage text={<><strong>Welcome to Bruin Connect.</strong><br /><br />Bruins are powerful individually, but even more powerful together. We'll match you with alumni networks, programs, and resources based on who you are, where you're headed, and what matters to you.<br /><br />This takes about 2 minutes.</>} animate>
+            <div style={{ fontSize: 11, color: "#8896A6", marginBottom: 14, display: "flex", alignItems: "center", gap: 6, fontStyle: "italic" }}>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#8896A6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+              Your responses are not stored or collected.
+            </div>
             <button onClick={() => setStep(STEPS.NAME)} style={{
               padding: "13px 36px", borderRadius: 6, border: "none",
-              background: COLORS.uclaGold, color: COLORS.black,
+              background: COLORS.uclaGold, color: COLORS.darkestBlue,
               fontSize: 15, fontWeight: 700, fontFamily: "'Inter', sans-serif",
               cursor: "pointer", letterSpacing: "-0.01em",
-              boxShadow: "0 3px 12px rgba(255,209,0,0.35)",
+              boxShadow: "0 3px 12px rgba(255,209,0,0.3)",
               textTransform: "lowercase",
             }}>get started</button>
           </BotMessage>
@@ -579,7 +748,7 @@ function UCLAAlumChatbot() {
               <input autoFocus type="text" placeholder="Your first name" value={name}
                 onChange={(e) => setName(e.target.value)}
                 onKeyDown={(e) => { if (e.key === "Enter" && name.trim()) { addH(name); setStep(STEPS.GRAD_YEAR); } }}
-                style={{ flex: 1, padding: "11px 14px", borderRadius: 6, border: "2px solid #D4D9E1", fontSize: 15, fontFamily: "'Inter', sans-serif", outline: "none" }} />
+                style={{ flex: 1, padding: "11px 14px", borderRadius: 6, border: "2px solid #D4D9E1", fontSize: 15, fontFamily: "'Inter', sans-serif", outline: "none", transition: "border-color 0.2s" }} />
               <BrandButton onClick={() => { addH(name); setStep(STEPS.GRAD_YEAR); }} disabled={!name.trim()} label="next" />
             </div>
           </BotMessage>
@@ -589,15 +758,21 @@ function UCLAAlumChatbot() {
           <>
             <UserBubble text={name} />
             <BotMessage text={<>Good to meet you, <strong>{name}</strong>. When did you (or will you) graduate?</>} animate>
-              <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-                {["2024", "2025", "2026"].map((yr) => (
+              <div style={{ display: "flex", gap: 8, flexWrap: "wrap", alignItems: "center" }}>
+                {["2023", "2024", "2025", "2026"].map((yr) => (
                   <button key={yr} onClick={() => { setGradYear(yr); addH(`Class of ${yr}`); setStep(STEPS.DEGREE); }}
                     style={{ padding: "9px 22px", borderRadius: 6, border: "2px solid #D4D9E1", background: COLORS.white, fontSize: 14, fontFamily: "'Inter', sans-serif", cursor: "pointer", fontWeight: 600, color: COLORS.black, transition: "all 0.15s" }}>{yr}</button>
                 ))}
-                <input type="text" placeholder="Other" value={gradYear}
-                  onChange={(e) => setGradYear(e.target.value.replace(/\D/g, "").slice(0, 4))}
-                  onKeyDown={(e) => { if (e.key === "Enter" && gradYear) { addH(`Class of ${gradYear}`); setStep(STEPS.DEGREE); } }}
-                  style={{ width: 90, padding: "9px 12px", borderRadius: 6, border: "2px solid #D4D9E1", fontSize: 14, fontFamily: "'Inter', sans-serif", outline: "none" }} />
+                <div style={{ display: "flex", gap: 6, alignItems: "center" }}>
+                  <input type="text" placeholder="Other" value={gradYear}
+                    onChange={(e) => setGradYear(e.target.value.replace(/\D/g, "").slice(0, 4))}
+                    onKeyDown={(e) => { if (e.key === "Enter" && gradYear.length === 4) { addH(`Class of ${gradYear}`); setStep(STEPS.DEGREE); } }}
+                    style={{ width: 80, padding: "9px 12px", borderRadius: 6, border: "2px solid #D4D9E1", fontSize: 14, fontFamily: "'Inter', sans-serif", outline: "none", transition: "border-color 0.2s" }} />
+                  {gradYear.length === 4 && (
+                    <button onClick={() => { addH(`Class of ${gradYear}`); setStep(STEPS.DEGREE); }}
+                      style={{ padding: "9px 16px", borderRadius: 6, border: "none", background: COLORS.uclaBlue, color: COLORS.white, fontSize: 13, fontWeight: 600, fontFamily: "'Inter', sans-serif", cursor: "pointer", transition: "all 0.2s", animation: "fadeIn 0.2s ease-out" }}>enter</button>
+                  )}
+                </div>
               </div>
             </BotMessage>
           </>
@@ -637,24 +812,7 @@ function UCLAAlumChatbot() {
                   })}
                 </div>
                 <div style={{ fontSize: 11, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.05em", color: "#718096", marginBottom: 6 }}>By Department</div>
-                <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 8 }}>
-                  {SCHOOL_OPTIONS.filter(o => o.group === "dept").map((opt) => {
-                    const isSelected = school === opt.id;
-                    return (
-                      <button key={opt.id} onClick={() => setSchool(isSelected ? "" : opt.id)} style={{
-                        display: "flex", alignItems: "center", gap: 8, padding: "11px 13px", borderRadius: 8,
-                        border: isSelected ? `2px solid ${COLORS.goldBorder}` : "2px solid #D4D9E1",
-                        background: isSelected ? COLORS.goldTint : COLORS.white,
-                        cursor: "pointer", fontSize: 13, fontFamily: "'Inter', sans-serif",
-                        color: isSelected ? COLORS.darkestBlue : "#2D3748",
-                        fontWeight: isSelected ? 600 : 400, transition: "all 0.15s ease", textAlign: "left", lineHeight: 1.3,
-                      }}>
-                        <span style={{ fontSize: 15, flexShrink: 0, lineHeight: 1 }}>{opt.icon}</span>
-                        <span>{opt.label}</span>
-                      </button>
-                    );
-                  })}
-                </div>
+                <DeptDropdown school={school} setSchool={setSchool} />
               </div>
               <BrandButton onClick={() => { const label = school && school !== "none_school" ? SCHOOL_OPTIONS.find(o=>o.id===school)?.label : "Skipped"; addH(label); setStep(STEPS.IDENTITY); }}
                 label={school ? "continue" : "skip"} />

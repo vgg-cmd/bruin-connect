@@ -513,28 +513,60 @@ export default function UCLAAlumChatbot() {
   const results = step === STEPS.RESULTS ? getRecommendations({ identity, location, interests, involvement, career, gradYear, school }) : [];
   const lastUser = history[history.length - 1]?.user;
 
+  // Progress bar
+  const STEP_ORDER = ["welcome","name","grad_year","degree","school","identity","location","interests","involvement","career","results"];
+  const stepIndex = STEP_ORDER.indexOf(step);
+  const progress = step === "welcome" ? 0 : step === "results" ? 100 : Math.round((stepIndex / (STEP_ORDER.length - 1)) * 100);
+  const PROGRESS_LABELS = { welcome: "", name: "Getting to know you", grad_year: "Getting to know you", degree: "Academic background", school: "Academic background", identity: "Your community", location: "Your community", interests: "Your interests", involvement: "Your UCLA story", career: "Almost there", results: "" };
+  const progressLabel = PROGRESS_LABELS[step] || "";
+
+  // Auto-select mixed when 2+ ethnic identities selected
+  const ethnicIds = ["black","latino","asian_pacific","pilipino","american_indian","lgbtq","muslim","jewish","undocumented"];
+  const selectedEthnicCount = identity.filter(id => ethnicIds.includes(id)).length;
+  useEffect(() => {
+    if (selectedEthnicCount >= 2 && !identity.includes("mixed")) {
+      setIdentity(prev => [...prev, "mixed"]);
+    }
+  }, [selectedEthnicCount]);
+
   return (
-    <div style={{ width: "100%", maxWidth: 640, margin: "0 auto", height: "100vh", display: "flex", flexDirection: "column", fontFamily: "'Inter', 'Helvetica Neue', system-ui, sans-serif", background: COLORS.white }}>
+    <div style={{ width: "100%", maxWidth: 640, margin: "0 auto", height: "100vh", display: "flex", flexDirection: "column", fontFamily: "'Inter', 'Helvetica Neue', system-ui, sans-serif", background: "#FAFBFD" }}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
         @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes slideRight { from { opacity: 0; transform: translateX(16px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes shimmer { 0% { background-position: -200px 0; } 100% { background-position: 200px 0; } }
         input::placeholder { color: #A0AEC0; }
+        input:focus { border-color: ${COLORS.uclaBlue} !important; }
         * { box-sizing: border-box; }
         ::-webkit-scrollbar { width: 4px; }
         ::-webkit-scrollbar-thumb { background: ${COLORS.lighterBlue}; border-radius: 4px; }
       `}</style>
 
-      {/* Header */}
-      <div style={{ background: COLORS.white, padding: "14px 20px", borderBottom: `3px solid ${COLORS.uclaBlue}`, display: "flex", alignItems: "center", justifyContent: "space-between", flexShrink: 0 }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-          <span style={{ fontSize: 24 }}>🐻</span>
-          <div>
-            <div style={{ fontSize: 18, fontWeight: 700, color: COLORS.black, letterSpacing: "-0.02em", lineHeight: 1.1, textTransform: "lowercase" }}>bruin connect</div>
-            <div style={{ fontSize: 11, color: "#718096", fontWeight: 400, marginTop: 1 }}>find your alumni community</div>
+      {/* Header with progress */}
+      <div style={{ flexShrink: 0 }}>
+        <div style={{ background: COLORS.white, padding: "12px 20px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+            <span style={{ fontSize: 22 }}>🐻</span>
+            <div>
+              <div style={{ fontSize: 17, fontWeight: 700, color: COLORS.darkestBlue, letterSpacing: "-0.02em", lineHeight: 1.1, textTransform: "lowercase" }}>bruin connect</div>
+              <div style={{ fontSize: 10, color: "#8896A6", fontWeight: 500, marginTop: 2, letterSpacing: "0.02em" }}>alumni network finder</div>
+            </div>
           </div>
+          <UCLAAlumLogo size="small" />
         </div>
-        <UCLAAlumLogo size="small" />
+        {step !== "welcome" && step !== "results" && (
+          <div style={{ padding: "0 20px 10px 20px", background: COLORS.white }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 5 }}>
+              <span style={{ fontSize: 10, fontWeight: 600, color: COLORS.darkerBlue, textTransform: "uppercase", letterSpacing: "0.06em" }}>{progressLabel}</span>
+              <span style={{ fontSize: 10, fontWeight: 600, color: COLORS.lighterBlue }}>{progress}%</span>
+            </div>
+            <div style={{ height: 3, background: "#E8EDF2", borderRadius: 3, overflow: "hidden" }}>
+              <div style={{ height: "100%", width: `${progress}%`, background: `linear-gradient(90deg, ${COLORS.uclaBlue}, ${COLORS.lighterBlue})`, borderRadius: 3, transition: "width 0.5s cubic-bezier(0.22, 1, 0.36, 1)" }} />
+            </div>
+          </div>
+        )}
+        <div style={{ height: 1, background: step === "welcome" || step === "results" ? `${COLORS.uclaBlue}` : "transparent" }} />
       </div>
 
       {/* Chat */}
@@ -542,12 +574,16 @@ export default function UCLAAlumChatbot() {
 
         {step === STEPS.WELCOME && (
           <BotMessage text={<><strong>Welcome to Bruin Connect.</strong><br /><br />Bruins are powerful individually, but even more powerful together. We'll match you with alumni networks, programs, and resources based on who you are, where you're headed, and what matters to you.<br /><br />This takes about 2 minutes.</>} animate>
+            <div style={{ fontSize: 11, color: "#8896A6", marginBottom: 14, display: "flex", alignItems: "center", gap: 6, fontStyle: "italic" }}>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#8896A6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+              Your responses are not stored or collected.
+            </div>
             <button onClick={() => setStep(STEPS.NAME)} style={{
               padding: "13px 36px", borderRadius: 6, border: "none",
-              background: COLORS.uclaGold, color: COLORS.black,
+              background: COLORS.uclaGold, color: COLORS.darkestBlue,
               fontSize: 15, fontWeight: 700, fontFamily: "'Inter', sans-serif",
               cursor: "pointer", letterSpacing: "-0.01em",
-              boxShadow: "0 3px 12px rgba(255,209,0,0.35)",
+              boxShadow: "0 3px 12px rgba(255,209,0,0.3)",
               textTransform: "lowercase",
             }}>get started</button>
           </BotMessage>
@@ -559,7 +595,7 @@ export default function UCLAAlumChatbot() {
               <input autoFocus type="text" placeholder="Your first name" value={name}
                 onChange={(e) => setName(e.target.value)}
                 onKeyDown={(e) => { if (e.key === "Enter" && name.trim()) { addH(name); setStep(STEPS.GRAD_YEAR); } }}
-                style={{ flex: 1, padding: "11px 14px", borderRadius: 6, border: "2px solid #D4D9E1", fontSize: 15, fontFamily: "'Inter', sans-serif", outline: "none" }} />
+                style={{ flex: 1, padding: "11px 14px", borderRadius: 6, border: "2px solid #D4D9E1", fontSize: 15, fontFamily: "'Inter', sans-serif", outline: "none", transition: "border-color 0.2s" }} />
               <BrandButton onClick={() => { addH(name); setStep(STEPS.GRAD_YEAR); }} disabled={!name.trim()} label="next" />
             </div>
           </BotMessage>
@@ -569,15 +605,21 @@ export default function UCLAAlumChatbot() {
           <>
             <UserBubble text={name} />
             <BotMessage text={<>Good to meet you, <strong>{name}</strong>. When did you (or will you) graduate?</>} animate>
-              <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-                {["2024", "2025", "2026"].map((yr) => (
+              <div style={{ display: "flex", gap: 8, flexWrap: "wrap", alignItems: "center" }}>
+                {["2023", "2024", "2025", "2026"].map((yr) => (
                   <button key={yr} onClick={() => { setGradYear(yr); addH(`Class of ${yr}`); setStep(STEPS.DEGREE); }}
                     style={{ padding: "9px 22px", borderRadius: 6, border: "2px solid #D4D9E1", background: COLORS.white, fontSize: 14, fontFamily: "'Inter', sans-serif", cursor: "pointer", fontWeight: 600, color: COLORS.black, transition: "all 0.15s" }}>{yr}</button>
                 ))}
-                <input type="text" placeholder="Other" value={gradYear}
-                  onChange={(e) => setGradYear(e.target.value.replace(/\D/g, "").slice(0, 4))}
-                  onKeyDown={(e) => { if (e.key === "Enter" && gradYear) { addH(`Class of ${gradYear}`); setStep(STEPS.DEGREE); } }}
-                  style={{ width: 90, padding: "9px 12px", borderRadius: 6, border: "2px solid #D4D9E1", fontSize: 14, fontFamily: "'Inter', sans-serif", outline: "none" }} />
+                <div style={{ display: "flex", gap: 6, alignItems: "center" }}>
+                  <input type="text" placeholder="Other" value={gradYear}
+                    onChange={(e) => setGradYear(e.target.value.replace(/\D/g, "").slice(0, 4))}
+                    onKeyDown={(e) => { if (e.key === "Enter" && gradYear.length === 4) { addH(`Class of ${gradYear}`); setStep(STEPS.DEGREE); } }}
+                    style={{ width: 80, padding: "9px 12px", borderRadius: 6, border: "2px solid #D4D9E1", fontSize: 14, fontFamily: "'Inter', sans-serif", outline: "none", transition: "border-color 0.2s" }} />
+                  {gradYear.length === 4 && (
+                    <button onClick={() => { addH(`Class of ${gradYear}`); setStep(STEPS.DEGREE); }}
+                      style={{ padding: "9px 16px", borderRadius: 6, border: "none", background: COLORS.uclaBlue, color: COLORS.white, fontSize: 13, fontWeight: 600, fontFamily: "'Inter', sans-serif", cursor: "pointer", transition: "all 0.2s", animation: "fadeIn 0.2s ease-out" }}>enter</button>
+                  )}
+                </div>
               </div>
             </BotMessage>
           </>
