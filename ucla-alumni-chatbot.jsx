@@ -15,7 +15,7 @@ const COLORS = {
   goldBorder: "rgba(255, 209, 0, 0.65)",
 };
 
-const STEPS = { WELCOME: "welcome", NAME: "name", GRAD_YEAR: "grad_year", DEGREE: "degree", IDENTITY: "identity", LOCATION: "location", INTERESTS: "interests", CAREER: "career", RESULTS: "results" };
+const STEPS = { WELCOME: "welcome", NAME: "name", GRAD_YEAR: "grad_year", DEGREE: "degree", IDENTITY: "identity", LOCATION: "location", INTERESTS: "interests", INVOLVEMENT: "involvement", CAREER: "career", RESULTS: "results" };
 
 const IDENTITY_OPTIONS = [
   { id: "black", label: "Black / African American" },
@@ -95,7 +95,23 @@ const DEGREE_OPTIONS = [
   { id: "certificate", label: "Certificate", icon: "📋" },
 ];
 
-function getRecommendations({ identity, location, interests, career, gradYear }) {
+const INVOLVEMENT_OPTIONS = [
+  { id: "student_athlete", label: "Student-Athlete / Spirit Squad", icon: "🏅" },
+  { id: "daily_bruin", label: "Daily Bruin", icon: "📰" },
+  { id: "marching_band", label: "Marching Band / Pep Band", icon: "🎺" },
+  { id: "greek_life", label: "Greek Life", icon: "🏛️" },
+  { id: "student_gov", label: "Student Government / USAC", icon: "🗳️" },
+  { id: "research", label: "Research / Lab Work", icon: "🔬" },
+  { id: "aap", label: "Academic Advancement Program (AAP)", icon: "📚" },
+  { id: "internships", label: "Internships / Career Center", icon: "💼" },
+  { id: "community_service", label: "Community Service / Volunteering", icon: "❤️" },
+  { id: "performing_arts", label: "Performing Arts / Theater / Film", icon: "🎭" },
+  { id: "cultural_orgs", label: "Cultural Organizations", icon: "🌍" },
+  { id: "entrepreneurship_club", label: "Entrepreneurship / Business Clubs", icon: "🚀" },
+  { id: "none_involvement", label: "None of these / Prefer not to say", icon: "—" },
+];
+
+function getRecommendations({ identity, location, interests, involvement, career, gradYear }) {
   const recs = [];
 
   // Class year page (2022–2025)
@@ -145,7 +161,7 @@ function getRecommendations({ identity, location, interests, career, gradYear })
     atlanta: { name: "Atlanta Network", url: "https://alumni.ucla.edu/alumni-networks/atlanta-network/" },
     dallas: { name: "Dallas-Fort Worth Network", url: "https://alumni.ucla.edu/alumni-networks/dallas-fort-worth-network/" },
     hawaii: { name: "Hawaii Network", url: "https://alumni.ucla.edu/alumni-networks/hawaii-network/" },
-    international: { name: "International Networks", url: "https://alumni.ucla.edu/alumni-networks/regional-networks/#international" },
+    international: { name: "International Networks", url: "https://alumni.ucla.edu/alumni-networks/regional-networks/#international:~:text=C.%20AREA%20NETWORK-,INTERNATIONAL,-BEIJING%20NETWORK" },
     other_us: { name: "Regional Networks", url: "https://alumni.ucla.edu/alumni-networks/regional-networks/" },
   };
   if (LN[location]) recs.push({ ...LN[location], desc: "Your local Bruin hub — game watches, networking nights, and community events near you.", tag: "regional network", icon: "📍" });
@@ -165,7 +181,7 @@ function getRecommendations({ identity, location, interests, career, gradYear })
     recs.push({ name: "Bruin Business Directory", url: "https://alumni.ucla.edu/bruin-business-directory/", desc: "List your business and discover Bruin-owned companies.", tag: "entrepreneurship", icon: "📋" });
   }
   if (interests.includes("entertainment")) {
-    recs.push({ name: "Theater, Film & Television Alumni Network", url: "https://alumni.ucla.edu/alumni-networks/professional-networks/", desc: "Connect with Bruins in film, TV, theater, music, gaming, and media.", tag: "professional network", icon: "🎬" });
+    recs.push({ name: "Theater, Film & Television Alumni Network", url: "https://www.tft.ucla.edu/alumni/", desc: "Connect with Bruins in film, TV, theater, music, gaming, and media.", tag: "professional network", icon: "🎬" });
   }
   if (interests.includes("sports")) {
     recs.push({ name: "UCLA Sports & Game Watches", url: "https://alumni.ucla.edu/ucla-sports/", desc: "Cheer on the Bruins, find local watch parties, and relive the rivalry.", tag: "sports", icon: "🏈" });
@@ -195,6 +211,25 @@ function getRecommendations({ identity, location, interests, career, gradYear })
   }
   if (interests.includes("food_culture")) {
     recs.push({ name: "Food & Culture Events", url: "https://alumni.ucla.edu/events-calendar/category/food-culture", desc: "Culinary experiences, Bruin-owned restaurant spotlights, and food networking.", tag: "food & culture", icon: "🍜" });
+  }
+
+  // === INVOLVEMENT-BASED AFFINITY NETWORKS ===
+  if (involvement && involvement.length > 0 && !involvement.includes("none_involvement")) {
+    if (involvement.includes("student_athlete")) recs.push({ name: "Bruin Varsity Club", url: "https://alumni.ucla.edu/bruin-varsity", desc: "Connecting former student-athletes, trainers, managers, and spirit squad members.", tag: "affinity network", icon: "🏅" });
+    if (involvement.includes("daily_bruin")) recs.push({ name: "Daily Bruin Alumni Network", url: "https://alumni.ucla.edu/alumni-networks/daily-bruin-alumni-network/", desc: "Community for former Daily Bruin staff — networking, mentorship, and scholarships.", tag: "affinity network", icon: "📰" });
+    if (involvement.includes("marching_band")) recs.push({ name: "UCLA Alumni Band", url: "https://alumni.ucla.edu/alumni-networks/alumni-band-network/", desc: "Stay connected with the Bruin band community after graduation.", tag: "affinity network", icon: "🎺" });
+    if (involvement.includes("greek_life")) recs.push({ name: "Order of the Blue Shield", url: "https://alumni.ucla.edu/alumni-networks/order-of-the-blue-shield/", desc: "Fostering goodwill and friendship while furthering UCLA's interests.", tag: "affinity network", icon: "🛡️" });
+    if (involvement.includes("student_gov")) recs.push({ name: "Prytanean Alumnae Association", url: "https://alumni.ucla.edu/alumni-networks/prytanean-alumnae-network/", desc: "The oldest honorary alumnae organization of the UC system — service to university and community.", tag: "affinity network", icon: "🏛️" });
+    if (involvement.includes("research")) recs.push({ name: "Professional Networks by Department", url: "https://alumni.ucla.edu/alumni-networks/professional-networks/", desc: "Connect with alumni in your academic field — by department or school.", tag: "professional network", icon: "🔬" });
+    if (involvement.includes("aap")) recs.push({ name: "AAP Alumni Network", url: "https://alumni.ucla.edu/alumni-networks/aapnetwork/", desc: "Advancing philanthropy and professional development for AAP graduates.", tag: "affinity network", icon: "📚" });
+    if (involvement.includes("internships")) recs.push({ name: "Internship Alumni Network", url: "https://alumni.ucla.edu/alumni-networks/internship-alumni-network/", desc: "Supporting student career development through internships and mentoring.", tag: "affinity network", icon: "💼" });
+    if (involvement.includes("community_service")) {
+      recs.push({ name: "Volunteer with UCLA Alumni", url: "https://alumni.ucla.edu/get-involved/", desc: "Give back through mentoring, event hosting, scholarships, and service.", tag: "volunteer", icon: "❤️" });
+      recs.push({ name: "Westwood Women's Bruins Club", url: "https://alumni.ucla.edu/alumni-networks/westwood-womens-network/", desc: "Encouraging interest in UCLA's aims and serving the university as a volunteer.", tag: "affinity network", icon: "🌟" });
+    }
+    if (involvement.includes("performing_arts")) recs.push({ name: "Theater, Film & Television Alumni Network", url: "https://www.tft.ucla.edu/alumni/", desc: "Connect with Bruins in film, TV, theater, and the performing arts.", tag: "professional network", icon: "🎭" });
+    if (involvement.includes("cultural_orgs")) recs.push({ name: "Diversity Alumni Networks", url: "https://alumni.ucla.edu/diversity-programs-and-initiatives/networks/", desc: "Identity-based networks celebrating UCLA's diverse alumni community.", tag: "diversity network", icon: "🌍" });
+    if (involvement.includes("entrepreneurship_club")) recs.push({ name: "Bruin Angels Investor Network", url: "https://alumni.ucla.edu/bruin-angels-investor-network/", desc: "Angel investing, startup support, and connecting Bruin entrepreneurs.", tag: "professional network", icon: "🚀" });
   }
 
   // === CAREER-STAGE RESOURCES ===
@@ -434,6 +469,7 @@ export default function UCLAAlumChatbot() {
   const [identity, setIdentity] = useState([]);
   const [location, setLocation] = useState("");
   const [interests, setInterests] = useState([]);
+  const [involvement, setInvolvement] = useState([]);
   const [career, setCareer] = useState("");
   const [history, setHistory] = useState([]);
   const chatRef = useRef(null);
@@ -446,7 +482,7 @@ export default function UCLAAlumChatbot() {
     else setter(current.includes(id) ? current.filter((i) => i !== id) : [...current.filter((i) => i !== "none"), id]);
   };
 
-  const results = step === STEPS.RESULTS ? getRecommendations({ identity, location, interests, career, gradYear }) : [];
+  const results = step === STEPS.RESULTS ? getRecommendations({ identity, location, interests, involvement, career, gradYear }) : [];
   const lastUser = history[history.length - 1]?.user;
 
   return (
@@ -555,7 +591,22 @@ export default function UCLAAlumChatbot() {
             <BotMessage text={<>What are you most interested in as an alum? <span style={{ color: "#718096" }}>(select up to 4)</span></>} animate>
               <OptionGrid options={INTEREST_OPTIONS} selected={interests}
                 onToggle={(id) => { if (interests.includes(id)) setInterests(interests.filter((i) => i !== id)); else if (interests.length < 4) setInterests([...interests, id]); }} columns={2} />
-              <BrandButton onClick={() => { addH(interests.map((id) => INTEREST_OPTIONS.find((o) => o.id === id)?.label).join(", ")); setStep(STEPS.CAREER); }} disabled={interests.length === 0} label="continue" />
+              <BrandButton onClick={() => { addH(interests.map((id) => INTEREST_OPTIONS.find((o) => o.id === id)?.label).join(", ")); setStep(STEPS.INVOLVEMENT); }} disabled={interests.length === 0} label="continue" />
+            </BotMessage>
+          </>
+        )}
+
+        {step === STEPS.INVOLVEMENT && (
+          <>
+            <UserBubble text={lastUser} />
+            <BotMessage text={<>Were you involved in any of these at UCLA? This helps us match you with the right affinity networks. <span style={{ color: "#718096" }}>(select all that apply)</span></>} animate>
+              <OptionGrid options={INVOLVEMENT_OPTIONS} selected={involvement}
+                onToggle={(id) => {
+                  if (id === "none_involvement") setInvolvement(involvement.includes("none_involvement") ? [] : ["none_involvement"]);
+                  else setInvolvement(involvement.includes(id) ? involvement.filter((i) => i !== id) : [...involvement.filter((i) => i !== "none_involvement"), id]);
+                }} columns={2} />
+              <BrandButton onClick={() => { addH(involvement.length && !involvement.includes("none_involvement") ? involvement.map((id) => INVOLVEMENT_OPTIONS.find((o) => o.id === id)?.label).join(", ") : "Skipped"); setStep(STEPS.CAREER); }}
+                label={involvement.length ? "continue" : "skip"} />
             </BotMessage>
           </>
         )}
@@ -601,7 +652,7 @@ export default function UCLAAlumChatbot() {
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
                   download my resources
                 </button>
-                <button onClick={() => { setStep(STEPS.WELCOME); setName(""); setGradYear(""); setDegree(""); setIdentity([]); setLocation(""); setInterests([]); setCareer(""); setHistory([]); }}
+                <button onClick={() => { setStep(STEPS.WELCOME); setName(""); setGradYear(""); setDegree(""); setIdentity([]); setLocation(""); setInterests([]); setInvolvement([]); setCareer(""); setHistory([]); }}
                   style={{ padding: "11px 20px", borderRadius: 6, border: "2px solid #D4D9E1", background: COLORS.white, fontSize: 13, fontFamily: "'Inter', sans-serif", cursor: "pointer", color: "#718096", fontWeight: 500 }}>↺ start over</button>
               </div>
               <a href="https://account.alumni.ucla.edu/" target="_blank" rel="noopener noreferrer"
