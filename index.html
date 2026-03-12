@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <meta name="description" content="Bruin Connect — Find your UCLA alumni networks, programs, and resources." />
   <meta name="theme-color" content="#2774AE" />
   <title>Bruin Connect | UCLA Alumni Network Finder</title>
@@ -10,6 +10,7 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html, body, #root { height: 100%; width: 100%; }
     body { font-family: 'Inter', 'Helvetica Neue', system-ui, sans-serif; }
+    input, select, textarea { font-size: 16px !important; }
   </style>
   <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
   <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
@@ -130,35 +131,110 @@ const SCHOOL_OPTIONS = [
   { id: "social_welfare", label: "Luskin School of Social Welfare", icon: "🤲", group: "school", url: "https://luskin.ucla.edu/social-welfare/alumni/" },
   { id: "tft", label: "Theater, Film & Television", icon: "🎬", group: "school", url: "https://www.tft.ucla.edu/alumni/" },
   { id: "arts_architecture", label: "Arts & Architecture", icon: "🏗️", group: "school", url: "https://alumni.ucla.edu/alumni-networks/arts-and-architecture-network/" },
-  // ── College Departments ──
+  // ── A ──
+  { id: "aerospace_studies", label: "Aerospace Studies (Air Force ROTC)", icon: "✈️", group: "dept", url: "http://afrotc.ucla.edu" },
+  { id: "african_american_studies", label: "African American Studies", icon: "✊🏿", group: "dept", url: "http://afam.ucla.edu" },
+  { id: "african_studies", label: "African Studies", icon: "🌍", group: "dept", url: "http://web.international.ucla.edu/institute/idps/africanstudies/" },
+  { id: "american_indian_studies", label: "American Indian Studies", icon: "🪶", group: "dept", url: "http://americanindianstudies.ucla.edu" },
+  { id: "anesthesiology", label: "Anesthesiology & Perioperative Medicine", icon: "💊", group: "dept", url: "http://anes.ucla.edu" },
   { id: "anthropology", label: "Anthropology", icon: "🏺", group: "dept", url: "https://www.anthro.ucla.edu/about/alumni" },
+  { id: "applied_linguistics", label: "Applied Linguistics", icon: "💬", group: "dept", url: "http://linguistics.ucla.edu/undergraduate/majors-and-minors/" },
+  { id: "archaeology", label: "Archaeology", icon: "⛏️", group: "dept", url: "http://www.archaeology.ucla.edu" },
+  { id: "architecture", label: "Architecture and Urban Design", icon: "🏗️", group: "dept", url: "http://www.aud.ucla.edu" },
+  { id: "art", label: "Art", icon: "🎨", group: "dept", url: "http://art.ucla.edu" },
   { id: "art_history", label: "Art History", icon: "🖼️", group: "dept", url: "https://arthistory.ucla.edu/alumni/" },
-  { id: "asian_languages", label: "Asian Languages & Cultures", icon: "🀄", group: "dept", url: "https://alc.ucla.edu/alumni/" },
-  { id: "chemistry", label: "Chemistry & Biochemistry", icon: "🧪", group: "dept", url: "https://www.chemistry.ucla.edu/alumni/" },
+  { id: "asian_american_studies", label: "Asian American Studies", icon: "🌏", group: "dept", url: "http://asianam.ucla.edu" },
+  { id: "asian_languages", label: "Asian Languages and Cultures", icon: "🀄", group: "dept", url: "https://alc.ucla.edu/alumni/" },
+  { id: "atmospheric_oceanic", label: "Atmospheric and Oceanic Sciences", icon: "🌊", group: "dept", url: "https://www.atmos.ucla.edu" },
+  // ── B ──
+  { id: "bioengineering", label: "Bioengineering", icon: "🦾", group: "dept", url: "http://www.bioeng.ucla.edu" },
+  { id: "bioinformatics", label: "Bioinformatics", icon: "🧬", group: "dept", url: "http://bioinformatics.ucla.edu" },
+  { id: "biological_chemistry", label: "Biological Chemistry", icon: "⚗️", group: "dept", url: "http://www.biolchem.ucla.edu" },
+  { id: "biomathematics", label: "Biomathematics", icon: "🔢", group: "dept", url: "http://biomath.ucla.edu" },
+  { id: "biostatistics", label: "Biostatistics", icon: "📊", group: "dept", url: "https://www.biostat.ucla.edu" },
+  // ── C ──
+  { id: "chemical_engineering", label: "Chemical and Biomolecular Engineering", icon: "⚗️", group: "dept", url: "http://www.chemeng.ucla.edu" },
+  { id: "chemistry", label: "Chemistry and Biochemistry", icon: "🧪", group: "dept", url: "https://www.chemistry.ucla.edu/alumni/" },
+  { id: "chicana_chicano", label: "Chicana and Chicano Studies", icon: "🌎", group: "dept", url: "http://chavez.ucla.edu" },
+  { id: "civil_environmental_eng", label: "Civil and Environmental Engineering", icon: "🌉", group: "dept", url: "http://www.cee.ucla.edu" },
   { id: "classics", label: "Classics", icon: "🏛️", group: "dept", url: "https://classics.ucla.edu/alumni/" },
   { id: "communication", label: "Communication", icon: "📡", group: "dept", url: "https://comm.ucla.edu/alumni/" },
+  { id: "community_health", label: "Community Health Sciences", icon: "🏥", group: "dept", url: "http://chs.ph.ucla.edu" },
   { id: "comparative_lit", label: "Comparative Literature", icon: "📚", group: "dept", url: "https://complit.ucla.edu/alumni/" },
-  { id: "earth_space", label: "Earth, Planetary & Space Sciences", icon: "🌍", group: "dept", url: "https://epss.ucla.edu/alumni/" },
+  { id: "computational_systems_bio", label: "Computational and Systems Biology", icon: "🖥️", group: "dept", url: "https://casb.ucla.edu" },
+  { id: "computer_science", label: "Computer Science", icon: "💻", group: "dept", url: "http://www.cs.ucla.edu" },
+  // ── D ──
+  { id: "design_media_arts", label: "Design | Media Arts", icon: "🎭", group: "dept", url: "http://dma.ucla.edu" },
+  { id: "digital_humanities", label: "Digital Humanities", icon: "🌐", group: "dept", url: "http://www.cdh.ucla.edu" },
+  // ── E ──
+  { id: "earth_space", label: "Earth, Planetary, and Space Sciences", icon: "🌍", group: "dept", url: "https://epss.ucla.edu/alumni/" },
+  { id: "east_asian_studies", label: "East Asian Studies", icon: "🗾", group: "dept", url: "http://web.international.ucla.edu/institute/idps/eastasianstudies/" },
+  { id: "ecology_evolutionary_bio", label: "Ecology and Evolutionary Biology", icon: "🦎", group: "dept", url: "https://www.eeb.ucla.edu" },
   { id: "economics", label: "Economics", icon: "📈", group: "dept", url: "https://economics.ucla.edu/alumni/" },
+  { id: "electrical_computer_eng", label: "Electrical and Computer Engineering", icon: "⚡", group: "dept", url: "http://www.ee.ucla.edu" },
   { id: "english", label: "English", icon: "✍️", group: "dept", url: "https://english.ucla.edu/alumni/" },
+  { id: "environmental_health", label: "Environmental Health Sciences", icon: "♻️", group: "dept", url: "http://ehs.ph.ucla.edu" },
+  { id: "epidemiology", label: "Epidemiology", icon: "🔬", group: "dept", url: "http://epi.ph.ucla.edu" },
   { id: "ethnomusicology", label: "Ethnomusicology", icon: "🎵", group: "dept", url: "https://ethnomusicology.ucla.edu/alumni/" },
+  // ── F ──
+  { id: "film_tv", label: "Film, Television, and Digital Media", icon: "🎬", group: "dept", url: "http://www.tft.ucla.edu/programs/film-tv-digital-media-department/" },
+  { id: "french", label: "French and Francophone Studies", icon: "🇫🇷", group: "dept", url: "http://french.ucla.edu" },
+  // ── G ──
+  { id: "gender_studies", label: "Gender Studies", icon: "♀️", group: "dept", url: "http://genderstudies.ucla.edu" },
   { id: "geography", label: "Geography", icon: "🗺️", group: "dept", url: "https://geography.ucla.edu/alumni/" },
+  { id: "germanic", label: "Germanic Languages", icon: "🇩🇪", group: "dept", url: "http://germanic.ucla.edu" },
   { id: "global_studies", label: "Global Studies", icon: "🌐", group: "dept", url: "https://global.ucla.edu/alumni/" },
-  { id: "health_policy", label: "Health Policy & Management", icon: "📋", group: "dept", url: "https://ph.ucla.edu/departments/health-policy-management/alumni" },
+  // ── H ──
+  { id: "health_policy", label: "Health Policy and Management", icon: "📋", group: "dept", url: "https://ph.ucla.edu/departments/health-policy-management/alumni" },
   { id: "history", label: "History", icon: "📜", group: "dept", url: "https://history.ucla.edu/alumni/" },
-  { id: "ling", label: "Linguistics", icon: "💬", group: "dept", url: "https://linguistics.ucla.edu/alumni/" },
+  { id: "human_genetics", label: "Human Genetics", icon: "🧬", group: "dept", url: "http://www.genetics.ucla.edu" },
+  // ── I ──
+  { id: "information_studies", label: "Information Studies", icon: "📂", group: "dept", url: "https://is.gseis.ucla.edu" },
+  { id: "integrative_biology", label: "Integrative Biology and Physiology", icon: "🫀", group: "dept", url: "https://www.ibp.ucla.edu" },
+  { id: "international_development", label: "International Development Studies", icon: "🌍", group: "dept", url: "https://www.international.ucla.edu/ids" },
+  { id: "italian", label: "Italian", icon: "🇮🇹", group: "dept", url: "http://italian.ucla.edu" },
+  // ── L ──
+  { id: "labor_studies", label: "Labor Studies", icon: "✊", group: "dept", url: "http://irle.ucla.edu/labor-studies/about/" },
+  { id: "latin_american", label: "Latin American Studies", icon: "🌎", group: "dept", url: "http://web.international.ucla.edu/institute/idps/las/" },
+  { id: "lgbtq_studies", label: "LGBT and Queer Studies", icon: "🏳️‍🌈", group: "dept", url: "http://lgbtstudies.ucla.edu" },
+  { id: "linguistics", label: "Linguistics", icon: "💬", group: "dept", url: "https://linguistics.ucla.edu/alumni/" },
+  // ── M ──
+  { id: "materials_science", label: "Materials Science and Engineering", icon: "🔩", group: "dept", url: "http://www.mse.ucla.edu" },
   { id: "math", label: "Mathematics", icon: "📐", group: "dept", url: "https://ww3.math.ucla.edu/alumni/" },
+  { id: "mechanical_aerospace", label: "Mechanical and Aerospace Engineering", icon: "🚀", group: "dept", url: "http://www.mae.ucla.edu" },
   { id: "microbiology", label: "Microbiology, Immunology & Molecular Genetics", icon: "🦠", group: "dept", url: "https://www.mimg.ucla.edu/alumni/" },
-  { id: "molecular_bio", label: "Molecular, Cell & Developmental Biology", icon: "🧬", group: "dept", url: "https://mcdb.ucla.edu/alumni/" },
+  { id: "molecular_bio", label: "Molecular, Cell, and Developmental Biology", icon: "🧬", group: "dept", url: "https://mcdb.ucla.edu/alumni/" },
+  { id: "molecular_pharmacology", label: "Molecular and Medical Pharmacology", icon: "💊", group: "dept", url: "http://www.pharmacology.ucla.edu" },
   { id: "music", label: "Music", icon: "🎼", group: "dept", url: "https://schoolofmusic.ucla.edu/alumni/" },
+  { id: "music_industry", label: "Music Industry", icon: "🎧", group: "dept", url: "https://schoolofmusic.ucla.edu/alumni/" },
+  { id: "musicology", label: "Musicology", icon: "🎵", group: "dept", url: "https://schoolofmusic.ucla.edu/alumni/" },
+  // ── N ──
+  { id: "near_eastern", label: "Near Eastern Languages and Cultures", icon: "🕌", group: "dept", url: "http://nelc.ucla.edu" },
+  { id: "neurobiology", label: "Neurobiology", icon: "🧠", group: "dept", url: "https://www.neurobio.ucla.edu" },
   { id: "neuroscience", label: "Neuroscience", icon: "🧠", group: "dept", url: "https://www.neuroscience.ucla.edu/alumni/" },
+  { id: "nordic", label: "Nordic / Scandinavian Studies", icon: "🇸🇪", group: "dept", url: "http://scandinavian.ucla.edu" },
+  { id: "nursing_dept", label: "Nursing", icon: "💉", group: "dept", url: "https://nursing.ucla.edu/alumni/" },
+  // ── P ──
   { id: "philosophy", label: "Philosophy", icon: "🤔", group: "dept", url: "https://philosophy.ucla.edu/alumni/" },
-  { id: "physics", label: "Physics & Astronomy", icon: "🔭", group: "dept", url: "https://www.physics.ucla.edu/alumni/" },
+  { id: "physics", label: "Physics and Astronomy", icon: "🔭", group: "dept", url: "https://www.physics.ucla.edu/alumni/" },
+  { id: "pilipino_studies", label: "Pilipino Studies", icon: "🇵🇭", group: "dept", url: "https://alumni.ucla.edu/alumni-networks/pilipino-alumni-association/" },
   { id: "political_science", label: "Political Science", icon: "🗳️", group: "dept", url: "https://polisci.ucla.edu/alumni/" },
-  { id: "psychology", label: "Psychology", icon: "🧪", group: "dept", url: "https://www.psych.ucla.edu/alumni/" },
+  { id: "psychology", label: "Psychology", icon: "🧠", group: "dept", url: "https://www.psych.ucla.edu/alumni/" },
+  { id: "public_policy", label: "Public Policy", icon: "📋", group: "dept", url: "https://luskin.ucla.edu/alumni/" },
+  // ── R ──
+  { id: "religion", label: "Study of Religion", icon: "🕊️", group: "dept", url: "http://religion.ucla.edu" },
+  // ── S ──
+  { id: "slavic", label: "Slavic, East European, and Eurasian Languages", icon: "🌏", group: "dept", url: "http://slavic.ucla.edu" },
   { id: "sociology", label: "Sociology", icon: "👥", group: "dept", url: "https://soc.ucla.edu/alumni/" },
-  { id: "statistics", label: "Statistics & Data Science", icon: "📊", group: "dept", url: "https://statistics.ucla.edu/alumni/" },
-  { id: "world_arts", label: "World Arts & Cultures / Dance", icon: "💃", group: "dept", url: "https://www.wacd.ucla.edu/alumni/" },
+  { id: "spanish_portuguese", label: "Spanish and Portuguese", icon: "🇪🇸", group: "dept", url: "http://www.spanport.ucla.edu" },
+  { id: "statistics", label: "Statistics and Data Science", icon: "📊", group: "dept", url: "https://statistics.ucla.edu/alumni/" },
+  // ── T ──
+  { id: "theater", label: "Theater", icon: "🎭", group: "dept", url: "http://www.tft.ucla.edu/programs/theater-department/" },
+  // ── U ──
+  { id: "urban_planning", label: "Urban Planning", icon: "🏙️", group: "dept", url: "https://luskin.ucla.edu/alumni/" },
+  // ── W ──
+  { id: "world_arts", label: "World Arts and Cultures / Dance", icon: "💃", group: "dept", url: "https://www.wacd.ucla.edu/alumni/" },
+  { id: "writing", label: "Writing Programs", icon: "✍️", group: "dept", url: "http://wp.ucla.edu" },
 ];
 
 const INVOLVEMENT_OPTIONS = [
