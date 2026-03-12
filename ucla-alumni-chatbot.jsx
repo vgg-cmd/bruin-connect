@@ -108,14 +108,14 @@ function getRecommendations({ identity, location, interests, career, gradYear })
     black: { name: "Black Alumni Association", url: "https://alumni.ucla.edu/alumni-networks/black-alumni-association-2/", desc: "Events, networking, and cultural celebrations with the BAA community.", tag: "diversity network", icon: "✊🏿" },
     latino: { name: "Latino Alumni Association", url: "https://alumni.ucla.edu/alumni-networks/latino-alumni-network/", desc: "Community events, EmPower Hour book talks, and cultural programming.", tag: "diversity network", icon: "🌎" },
     asian_pacific: { name: "Asian Pacific Alumni", url: "https://alumni.ucla.edu/alumni-networks/apaucla/", desc: "Networking and cultural events for Asian and Pacific Islander Bruins.", tag: "diversity network", icon: "🌏" },
-    pilipino: { name: "Pilipino Alumni Association", url: "https://alumni.ucla.edu/diversity-programs-and-initiatives/networks/", desc: "Events and mentorship with the Pilipino Bruin community.", tag: "diversity network", icon: "🇵🇭" },
+    pilipino: { name: "Pilipino Alumni Association", url: "https://alumni.ucla.edu/alumni-networks/pilipino-alumni-association/", desc: "Events and mentorship with the Pilipino Bruin community.", tag: "diversity network", icon: "🇵🇭" },
     american_indian: { name: "American Indian Alumni", url: "https://alumni.ucla.edu/alumni-networks/aiaucla/", desc: "Cultural events and community programming for Indigenous Bruins.", tag: "diversity network", icon: "🪶" },
-    mixed: { name: "Mixed Alumni Association", url: "https://alumni.ucla.edu/diversity-programs-and-initiatives/networks/", desc: "Community for multiracial and mixed-heritage Bruins.", tag: "diversity network", icon: "🤝" },
+    mixed: { name: "Mixed Alumni Association", url: "https://alumni.ucla.edu/alumni-networks/mixed-alumni-association/", desc: "Community for multiracial and mixed-heritage Bruins.", tag: "diversity network", icon: "🤝" },
     lgbtq: { name: "Lambda Alumni Association", url: "https://alumni.ucla.edu/alumni-networks/lambda-alumni/", desc: "Social events, pride celebrations, and community building for LGBTQ+ Bruins.", tag: "diversity network", icon: "🏳️‍🌈" },
-    muslim: { name: "Muslim Alumni Association", url: "https://alumni.ucla.edu/diversity-programs-and-initiatives/networks/", desc: "Faith-based and cultural community programming for Muslim Bruins.", tag: "diversity network", icon: "☪️" },
+    muslim: { name: "Muslim Alumni Association", url: "https://alumni.ucla.edu/alumni-networks/ucla-muslim-alumni-association/", desc: "Faith-based and cultural community programming for Muslim Bruins.", tag: "diversity network", icon: "☪️" },
     first_gen: { name: "First Gen Alumni Network", url: "https://alumni.ucla.edu/alumni-networks/first-gen-alumni-network/", desc: "Mentorship, resources, and community for first-generation grads.", tag: "affinity network", icon: "⭐" },
-    transfer: { name: "Transfer Student Alumni Network", url: "https://alumni.ucla.edu/alumni-networks/affinity-networks/", desc: "Connect with Bruins who share your transfer journey.", tag: "affinity network", icon: "🔄" },
-    undocumented: { name: "Undocumented Alumni Association", url: "https://alumni.ucla.edu/diversity-programs-and-initiatives/networks/", desc: "A supportive network for undocumented and DACAmented Bruins.", tag: "diversity network", icon: "💛" },
+    transfer: { name: "Transfer Student Alumni Network", url: "https://alumni.ucla.edu/alumni-networks/transfer-student-alumni-network/", desc: "Connect with Bruins who share your transfer journey.", tag: "affinity network", icon: "🔄" },
+    undocumented: { name: "Undocumented Alumni Association", url: "https://alumni.ucla.edu/alumni-networks/undocumented/", desc: "A supportive network for undocumented and DACAmented Bruins.", tag: "diversity network", icon: "💛" },
     veteran: { name: "VetNet", url: "https://alumni.ucla.edu/alumni-networks/ucla-alumni-veterans-network-vetnet/", desc: "Career resources, community events, and networking for Bruin veterans.", tag: "affinity network", icon: "🎖️" },
     disability: { name: "Disability Alumni Network", url: "https://alumni.ucla.edu/alumni-networks/udan/", desc: "Advocacy and connection for Bruins in the disability community.", tag: "affinity network", icon: "♿" },
     grad_professional: { name: "Graduate & Professional Student Alumni", url: "https://alumni.ucla.edu/alumni-networks/affinity-networks/", desc: "Networking tailored to graduate and professional degree holders.", tag: "affinity network", icon: "🎓" },
@@ -123,63 +123,89 @@ function getRecommendations({ identity, location, interests, career, gradYear })
   identity.forEach((id) => { if (IN[id]) recs.push(IN[id]); });
 
   const LN = {
-    la_westside: { name: "LA Westside Network", url: "https://alumni.ucla.edu/alumni-networks/la-westside-network/" },
+    la_westside: { name: "LA Westside Network", url: "https://alumni.ucla.edu/alumni-networks/los-angeles-westside-network/" },
     la_downtown: { name: "LA Downtown Network", url: "https://alumni.ucla.edu/alumni-networks/los-angeles-downtown-network/" },
-    la_southeast: { name: "LA Southeast Network", url: "https://alumni.ucla.edu/alumni-networks/regional-networks/" },
+    la_southeast: { name: "LA Southeast Network", url: "https://alumni.ucla.edu/alumni-networks/los-angeles-southeast-network/" },
     san_fernando: { name: "San Fernando Valley Network", url: "https://alumni.ucla.edu/alumni-networks/san-fernando-valley-network/" },
-    south_bay: { name: "South Bay Network", url: "https://alumni.ucla.edu/alumni-networks/south-bay-network/" },
-    beachside: { name: "Beachside Network", url: "https://alumni.ucla.edu/alumni-networks/regional-networks/" },
+    south_bay: { name: "South Bay Network", url: "https://alumni.ucla.edu/alumni-networks/bay-cities-network/" },
+    beachside: { name: "Beachside Network", url: "https://alumni.ucla.edu/alumni-networks/beachside-network/" },
     century_city: { name: "Century City Network", url: "https://alumni.ucla.edu/alumni-networks/regional-networks/" },
     orange_county: { name: "Orange County Network", url: "https://alumni.ucla.edu/alumni-networks/orange-county-network/" },
-    inland_empire: { name: "Inland Empire Network", url: "https://alumni.ucla.edu/alumni-networks/regional-networks/" },
-    san_diego: { name: "San Diego Network", url: "https://alumni.ucla.edu/alumni-networks/regional-networks/" },
+    inland_empire: { name: "Inland Empire Network", url: "https://alumni.ucla.edu/alumni-networks/inland-empire-network/" },
+    san_diego: { name: "San Diego Network", url: "https://alumni.ucla.edu/alumni-networks/san-diego-network/" },
     bay_area: { name: "Bay Area Network", url: "https://alumni.ucla.edu/alumni-networks/san-francisco-bay-area-network/" },
-    sacramento: { name: "Sacramento Network", url: "https://alumni.ucla.edu/alumni-networks/regional-networks/" },
-    seattle: { name: "Seattle Network", url: "https://alumni.ucla.edu/alumni-networks/regional-networks/" },
-    colorado: { name: "Colorado Network", url: "https://alumni.ucla.edu/alumni-networks/regional-networks/" },
+    sacramento: { name: "Sacramento Network", url: "https://alumni.ucla.edu/alumni-networks/sacramento-network/" },
+    central_valley: { name: "Central Valley Network", url: "https://alumni.ucla.edu/alumni-networks/central-valley-network/" },
+    seattle: { name: "Seattle Network", url: "https://alumni.ucla.edu/alumni-networks/seattle-network/" },
+    colorado: { name: "Colorado Network", url: "https://alumni.ucla.edu/alumni-networks/colorado-network/" },
     arizona: { name: "Arizona Network", url: "https://alumni.ucla.edu/alumni-networks/arizona-network/" },
     ny_tristate: { name: "New York Tri-State Network", url: "https://alumni.ucla.edu/alumni-networks/new-york-tri-state-network/" },
-    dc: { name: "Washington D.C. Network", url: "https://alumni.ucla.edu/alumni-networks/regional-networks/" },
+    dc: { name: "Washington D.C. Network", url: "https://alumni.ucla.edu/alumni-networks/washington-d-c-area-network/" },
     chicago: { name: "Chicago Network", url: "https://alumni.ucla.edu/alumni-networks/chicago-network/" },
-    atlanta: { name: "Atlanta Network", url: "https://alumni.ucla.edu/alumni-networks/regional-networks/" },
-    dallas: { name: "Dallas-Fort Worth Network", url: "https://alumni.ucla.edu/alumni-networks/regional-networks/" },
-    hawaii: { name: "Hawaii Network", url: "https://alumni.ucla.edu/alumni-networks/regional-networks/" },
+    atlanta: { name: "Atlanta Network", url: "https://alumni.ucla.edu/alumni-networks/atlanta-network/" },
+    dallas: { name: "Dallas-Fort Worth Network", url: "https://alumni.ucla.edu/alumni-networks/dallas-fort-worth-network/" },
+    hawaii: { name: "Hawaii Network", url: "https://alumni.ucla.edu/alumni-networks/hawaii-network/" },
+    international: { name: "International Networks", url: "https://alumni.ucla.edu/alumni-networks/regional-networks/#international" },
+    other_us: { name: "Regional Networks", url: "https://alumni.ucla.edu/alumni-networks/regional-networks/" },
   };
   if (LN[location]) recs.push({ ...LN[location], desc: "Your local Bruin hub — game watches, networking nights, and community events near you.", tag: "regional network", icon: "📍" });
 
+  // === INTEREST-BASED RESOURCES ===
   if (interests.includes("career_growth") || interests.includes("mentorship")) {
     recs.push({ name: "Alumni Career Engagement", url: "https://alumni.ucla.edu/alumni-career-engagement/", desc: "Resume reviews, career coaching, job boards, and professional development.", tag: "career", icon: "💼" });
     recs.push({ name: "UCLA ONE Platform", url: "https://alumni.ucla.edu/ucla-one/about-us/", desc: "UCLA's official networking and career platform — jobs, mentors, connections.", tag: "career", icon: "🔗" });
+    recs.push({ name: "Bruin Professionals Network", url: "https://alumni.ucla.edu/alumni-networks/professional-networks/", desc: "Professional networking events, panels, and workshops for career-focused Bruins.", tag: "professional network", icon: "🤝" });
   }
-  if (interests.includes("mentorship")) recs.push({ name: "Alumni Mentor Program", url: "https://alumni.ucla.edu/alumni-mentor-program/", desc: "Get paired with an experienced Bruin mentor — or mentor someone new.", tag: "mentorship", icon: "🧭" });
+  if (interests.includes("mentorship")) {
+    recs.push({ name: "Alumni Mentor Program", url: "https://alumni.ucla.edu/alumni-mentor-program/", desc: "Get paired with an experienced Bruin mentor — or mentor someone new.", tag: "mentorship", icon: "🧭" });
+    recs.push({ name: "Internship Alumni Network", url: "https://alumni.ucla.edu/alumni-networks/internship-alumni-network/", desc: "Supporting student career development through internships and mentoring.", tag: "affinity network", icon: "📋" });
+  }
   if (interests.includes("entrepreneurship")) {
-    recs.push({ name: "Bruin Angel Investors", url: "https://alumni.ucla.edu/events-calendar/category/bruin-angel-investors", desc: "Pitch your startup, find co-founders, connect with the Bruin investor community.", tag: "entrepreneurship", icon: "🚀" });
+    recs.push({ name: "Bruin Angels Investor Network", url: "https://alumni.ucla.edu/bruin-angels-investor-network/", desc: "Angel investing, startup support, and connecting Bruin entrepreneurs.", tag: "professional network", icon: "🚀" });
     recs.push({ name: "Bruin Business Directory", url: "https://alumni.ucla.edu/bruin-business-directory/", desc: "List your business and discover Bruin-owned companies.", tag: "entrepreneurship", icon: "📋" });
   }
-  if (interests.includes("entertainment")) recs.push({ name: "Bruin Entertainment Network", url: "https://alumni.ucla.edu/alumni-networks/professional-networks/", desc: "The network for Bruins in film, TV, music, gaming, and media.", tag: "professional network", icon: "🎬" });
-  if (interests.includes("sports")) recs.push({ name: "UCLA Sports & Game Watches", url: "https://alumni.ucla.edu/ucla-sports/", desc: "Cheer on the Bruins, find local watch parties, and relive the rivalry.", tag: "sports", icon: "🏈" });
+  if (interests.includes("entertainment")) {
+    recs.push({ name: "Theater, Film & Television Alumni Network", url: "https://alumni.ucla.edu/alumni-networks/professional-networks/", desc: "Connect with Bruins in film, TV, theater, music, gaming, and media.", tag: "professional network", icon: "🎬" });
+  }
+  if (interests.includes("sports")) {
+    recs.push({ name: "UCLA Sports & Game Watches", url: "https://alumni.ucla.edu/ucla-sports/", desc: "Cheer on the Bruins, find local watch parties, and relive the rivalry.", tag: "sports", icon: "🏈" });
+    recs.push({ name: "Bruin Varsity Club", url: "https://alumni.ucla.edu/bruin-varsity", desc: "Connecting former student-athletes, trainers, managers, and spirit squad members.", tag: "affinity network", icon: "🏅" });
+  }
   if (interests.includes("community")) {
     recs.push({ name: "Dinners for 12", url: "https://alumni.ucla.edu/events-calendar/category/dinners-for-12", desc: "Intimate dinner gatherings with 12 Bruins — real connections, real conversations.", tag: "social", icon: "🍽️" });
     recs.push({ name: "Events Calendar", url: "https://alumni.ucla.edu/events-calendar/", desc: "Browse all upcoming alumni events — mixers, panels, game watches, and more.", tag: "events", icon: "📅" });
+    recs.push({ name: "Order of the Blue Shield", url: "https://alumni.ucla.edu/alumni-networks/order-of-the-blue-shield/", desc: "A historic alumni organization dedicated to furthering UCLA's interests and welfare.", tag: "affinity network", icon: "🛡️" });
   }
-  if (interests.includes("travel")) recs.push({ name: "Alumni Travel", url: "https://alumni.ucla.edu/travel/", desc: "Explore the world with fellow Bruins on curated group adventures.", tag: "travel", icon: "✈️" });
+  if (interests.includes("travel")) {
+    recs.push({ name: "Alumni Travel", url: "https://alumni.ucla.edu/travel/", desc: "Explore the world with fellow Bruins on curated group adventures.", tag: "travel", icon: "✈️" });
+  }
   if (interests.includes("giving_back")) {
     recs.push({ name: "Volunteer with UCLA Alumni", url: "https://alumni.ucla.edu/get-involved/", desc: "Give back through mentoring, event hosting, scholarships, and service.", tag: "volunteer", icon: "❤️" });
     recs.push({ name: "Bruin Promise", url: "https://alumni.ucla.edu/bruin-promise/", desc: "UCLA's commitment to being there for Bruins at every stage of life.", tag: "community", icon: "🤞" });
+    recs.push({ name: "Gold Shield Alumnae", url: "https://alumni.ucla.edu/alumni-networks/gold-shield-alumnae-network/", desc: "Distinguished alumnae advancing the university through philanthropy, mentorship, and service.", tag: "affinity network", icon: "🏆" });
   }
   if (interests.includes("lifelong_learning")) {
     recs.push({ name: "Lifelong Learning", url: "https://alumni.ucla.edu/events-calendar/category/lifelong-learning", desc: "Lectures, book talks, and intellectual programming.", tag: "learning", icon: "📚" });
     recs.push({ name: "Bruin Success Podcast", url: "https://alumni.ucla.edu/bruin-success-podcast/", desc: "Inspiring stories from Bruins making their mark across industries.", tag: "learning", icon: "🎙️" });
+    recs.push({ name: "Town & Gown Affiliates", url: "https://alumni.ucla.edu/alumni-networks/the-affiliates-network/", desc: "Lunch and dinner events featuring distinguished faculty lecturers and speakers.", tag: "affinity network", icon: "🎓" });
   }
-  if (interests.includes("arts_culture")) recs.push({ name: "Arts & Culture Events", url: "https://alumni.ucla.edu/events-calendar/category/arts-culture", desc: "Gallery tours, performances, film screenings, and creative community.", tag: "arts", icon: "🎨" });
-  if (interests.includes("food_culture")) recs.push({ name: "Food & Culture Events", url: "https://alumni.ucla.edu/events-calendar/category/food-culture", desc: "Culinary experiences, Bruin-owned restaurant spotlights, and food networking.", tag: "food & culture", icon: "🍜" });
+  if (interests.includes("arts_culture")) {
+    recs.push({ name: "Arts & Culture Events", url: "https://alumni.ucla.edu/events-calendar/category/arts-culture", desc: "Gallery tours, performances, film screenings, and creative community.", tag: "arts", icon: "🎨" });
+    recs.push({ name: "Daily Bruin Alumni Network", url: "https://alumni.ucla.edu/alumni-networks/daily-bruin-alumni-network/", desc: "Community for former Daily Bruin staff — networking, mentorship, and scholarships.", tag: "affinity network", icon: "📰" });
+  }
+  if (interests.includes("food_culture")) {
+    recs.push({ name: "Food & Culture Events", url: "https://alumni.ucla.edu/events-calendar/category/food-culture", desc: "Culinary experiences, Bruin-owned restaurant spotlights, and food networking.", tag: "food & culture", icon: "🍜" });
+  }
 
+  // === CAREER-STAGE RESOURCES ===
   if (career === "job_searching" || career === "early_career") {
     if (!recs.find((r) => r.name === "Alumni Career Engagement")) recs.push({ name: "Alumni Career Engagement", url: "https://alumni.ucla.edu/alumni-career-engagement/", desc: "Resume reviews, career coaching, job boards, and professional development.", tag: "career", icon: "💼" });
-    recs.push({ name: "Bruin Professionals Network", url: "https://alumni.ucla.edu/alumni-networks/professional-networks/", desc: "Professional networking events, panels, and workshops.", tag: "professional network", icon: "🤝" });
+    if (!recs.find((r) => r.name === "Bruin Professionals Network")) recs.push({ name: "Bruin Professionals Network", url: "https://alumni.ucla.edu/alumni-networks/professional-networks/", desc: "Professional networking events, panels, and workshops.", tag: "professional network", icon: "🤝" });
   }
   if (career === "switching") recs.push({ name: "2nd Act Programming", url: "https://alumni.ucla.edu/events-calendar/category/2nd-act", desc: "For Bruins reinventing their careers — workshops, stories, and support.", tag: "career transition", icon: "🔀" });
   if (career === "grad_school") recs.push({ name: "Professional Programs & Services", url: "https://alumni.ucla.edu/professional-programs-and-services/", desc: "Continuing education, certificates, and development through UCLA.", tag: "education", icon: "🎓" });
+
+  // Always include
   recs.push({ name: "Bruin Stories", url: "https://alumni.ucla.edu/storyof/", desc: "Read inspiring stories from the Bruin community — and share your own.", tag: "community", icon: "📖" });
 
   const seen = new Set();
