@@ -15,7 +15,7 @@ const COLORS = {
   goldBorder: "rgba(255, 209, 0, 0.65)",
 };
 
-const STEPS = { WELCOME: "welcome", NAME: "name", GRAD_YEAR: "grad_year", DEGREE: "degree", IDENTITY: "identity", LOCATION: "location", INTERESTS: "interests", INVOLVEMENT: "involvement", CAREER: "career", RESULTS: "results" };
+const STEPS = { WELCOME: "welcome", NAME: "name", GRAD_YEAR: "grad_year", DEGREE: "degree", SCHOOL: "school", IDENTITY: "identity", LOCATION: "location", INTERESTS: "interests", INVOLVEMENT: "involvement", CAREER: "career", RESULTS: "results" };
 
 const IDENTITY_OPTIONS = [
   { id: "black", label: "Black / African American" },
@@ -95,6 +95,25 @@ const DEGREE_OPTIONS = [
   { id: "certificate", label: "Certificate", icon: "📋" },
 ];
 
+const SCHOOL_OPTIONS = [
+  { id: "none_school", label: "Skip / Not listed", icon: "—", group: "" },
+  { id: "anderson", label: "Anderson School of Management", icon: "📊", group: "school", url: "https://alumni.ucla.edu/alumni-networks/anderson-network/" },
+  { id: "dentistry", label: "School of Dentistry", icon: "🦷", group: "school", url: "https://alumni.ucla.edu/alumni-networks/dentistry-network/" },
+  { id: "education", label: "Education & Information Studies", icon: "📖", group: "school", url: "https://alumni.ucla.edu/alumni-networks/education-and-information-studies-alumni-network/" },
+  { id: "engineering", label: "Samueli School of Engineering", icon: "⚙️", group: "school", url: "https://alumni.ucla.edu/alumni-networks/engineering-network/" },
+  { id: "law", label: "School of Law", icon: "⚖️", group: "school", url: "https://alumni.ucla.edu/alumni-networks/law-network/" },
+  { id: "medicine", label: "David Geffen School of Medicine", icon: "🩺", group: "school", url: "https://alumni.ucla.edu/alumni-networks/medical-alumni-network/" },
+  { id: "public_health", label: "Fielding School of Public Health", icon: "🏥", group: "school", url: "https://alumni.ucla.edu/alumni-networks/public-health-network/" },
+  { id: "tft", label: "Theater, Film & Television", icon: "🎬", group: "school", url: "https://www.tft.ucla.edu/alumni/" },
+  { id: "chemistry", label: "Chemistry & Biochemistry", icon: "🧪", group: "dept", url: "https://alumni.ucla.edu/alumni-networks/chemistry-and-biochemistry-network/" },
+  { id: "earth_space", label: "Earth & Space Sciences", icon: "🌍", group: "dept", url: "https://alumni.ucla.edu/alumni-networks/earth-and-space-sciences-network/" },
+  { id: "english", label: "English", icon: "✍️", group: "dept", url: "https://alumni.ucla.edu/alumni-networks/english-network/" },
+  { id: "health_policy", label: "Health Policy & Management", icon: "📋", group: "dept", url: "https://alumni.ucla.edu/alumni-networks/health-policy-and-management-network/" },
+  { id: "math", label: "Mathematics", icon: "📐", group: "dept", url: "https://alumni.ucla.edu/alumni-networks/mathematics-network/" },
+  { id: "physics", label: "Physics & Astronomy", icon: "🔭", group: "dept", url: "https://alumni.ucla.edu/alumni-networks/physics-and-astronomy-network/" },
+  { id: "psychology", label: "Psychology", icon: "🧠", group: "dept", url: "https://alumni.ucla.edu/alumni-networks/psychology-network/" },
+];
+
 const INVOLVEMENT_OPTIONS = [
   { id: "student_athlete", label: "Student-Athlete / Spirit Squad", icon: "🏅" },
   { id: "daily_bruin", label: "Daily Bruin", icon: "📰" },
@@ -111,13 +130,21 @@ const INVOLVEMENT_OPTIONS = [
   { id: "none_involvement", label: "None of these / Prefer not to say", icon: "—" },
 ];
 
-function getRecommendations({ identity, location, interests, involvement, career, gradYear }) {
+function getRecommendations({ identity, location, interests, involvement, career, gradYear, school }) {
   const recs = [];
 
   // Class year page (2022–2025)
   const yr = parseInt(gradYear);
   if (yr >= 2022 && yr <= 2025) {
     recs.push({ name: `Class of ${gradYear}`, url: `https://alumni.ucla.edu/class-of-${gradYear}/`, desc: `Your class page — events, updates, and connections for the Class of ${gradYear}.`, tag: "your class", icon: "🎓" });
+  }
+
+  // School/Department professional network
+  if (school && school !== "none_school") {
+    const schoolData = SCHOOL_OPTIONS.find(s => s.id === school);
+    if (schoolData) {
+      recs.push({ name: schoolData.label + " Network", url: schoolData.url, desc: `Connect with alumni from ${schoolData.label} — events, mentorship, and professional development.`, tag: "professional network", icon: schoolData.icon });
+    }
   }
 
   const IN = {
@@ -466,6 +493,7 @@ export default function UCLAAlumChatbot() {
   const [name, setName] = useState("");
   const [gradYear, setGradYear] = useState("");
   const [degree, setDegree] = useState("");
+  const [school, setSchool] = useState("");
   const [identity, setIdentity] = useState([]);
   const [location, setLocation] = useState("");
   const [interests, setInterests] = useState([]);
@@ -482,7 +510,7 @@ export default function UCLAAlumChatbot() {
     else setter(current.includes(id) ? current.filter((i) => i !== id) : [...current.filter((i) => i !== "none"), id]);
   };
 
-  const results = step === STEPS.RESULTS ? getRecommendations({ identity, location, interests, involvement, career, gradYear }) : [];
+  const results = step === STEPS.RESULTS ? getRecommendations({ identity, location, interests, involvement, career, gradYear, school }) : [];
   const lastUser = history[history.length - 1]?.user;
 
   return (
@@ -559,7 +587,57 @@ export default function UCLAAlumChatbot() {
           <>
             <UserBubble text={`Class of ${gradYear}`} />
             <BotMessage text="What type of degree?" animate>
-              <OptionGrid options={DEGREE_OPTIONS} selected={degree} onToggle={(id) => { setDegree(id); addH(DEGREE_OPTIONS.find(o=>o.id===id)?.label); setStep(STEPS.IDENTITY); }} multi={false} columns={2} />
+              <OptionGrid options={DEGREE_OPTIONS} selected={degree} onToggle={(id) => { setDegree(id); addH(DEGREE_OPTIONS.find(o=>o.id===id)?.label); setStep(STEPS.SCHOOL); }} multi={false} columns={2} />
+            </BotMessage>
+          </>
+        )}
+
+        {step === STEPS.SCHOOL && (
+          <>
+            <UserBubble text={lastUser} />
+            <BotMessage text={<>What school or department were you in? This connects you with your professional alumni network.</>} animate>
+              <div style={{ maxWidth: 520 }}>
+                <div style={{ fontSize: 11, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.05em", color: "#718096", marginBottom: 6, marginTop: 4 }}>By School</div>
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 8, marginBottom: 12 }}>
+                  {SCHOOL_OPTIONS.filter(o => o.group === "school").map((opt) => {
+                    const isSelected = school === opt.id;
+                    return (
+                      <button key={opt.id} onClick={() => setSchool(isSelected ? "" : opt.id)} style={{
+                        display: "flex", alignItems: "center", gap: 8, padding: "11px 13px", borderRadius: 8,
+                        border: isSelected ? `2px solid ${COLORS.goldBorder}` : "2px solid #D4D9E1",
+                        background: isSelected ? COLORS.goldTint : COLORS.white,
+                        cursor: "pointer", fontSize: 13, fontFamily: "'Inter', sans-serif",
+                        color: isSelected ? COLORS.darkestBlue : "#2D3748",
+                        fontWeight: isSelected ? 600 : 400, transition: "all 0.15s ease", textAlign: "left", lineHeight: 1.3,
+                      }}>
+                        <span style={{ fontSize: 15, flexShrink: 0, lineHeight: 1 }}>{opt.icon}</span>
+                        <span>{opt.label}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+                <div style={{ fontSize: 11, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.05em", color: "#718096", marginBottom: 6 }}>By Department</div>
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 8 }}>
+                  {SCHOOL_OPTIONS.filter(o => o.group === "dept").map((opt) => {
+                    const isSelected = school === opt.id;
+                    return (
+                      <button key={opt.id} onClick={() => setSchool(isSelected ? "" : opt.id)} style={{
+                        display: "flex", alignItems: "center", gap: 8, padding: "11px 13px", borderRadius: 8,
+                        border: isSelected ? `2px solid ${COLORS.goldBorder}` : "2px solid #D4D9E1",
+                        background: isSelected ? COLORS.goldTint : COLORS.white,
+                        cursor: "pointer", fontSize: 13, fontFamily: "'Inter', sans-serif",
+                        color: isSelected ? COLORS.darkestBlue : "#2D3748",
+                        fontWeight: isSelected ? 600 : 400, transition: "all 0.15s ease", textAlign: "left", lineHeight: 1.3,
+                      }}>
+                        <span style={{ fontSize: 15, flexShrink: 0, lineHeight: 1 }}>{opt.icon}</span>
+                        <span>{opt.label}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+              <BrandButton onClick={() => { const label = school && school !== "none_school" ? SCHOOL_OPTIONS.find(o=>o.id===school)?.label : "Skipped"; addH(label); setStep(STEPS.IDENTITY); }}
+                label={school ? "continue" : "skip"} />
             </BotMessage>
           </>
         )}
@@ -652,7 +730,7 @@ export default function UCLAAlumChatbot() {
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
                   download my resources
                 </button>
-                <button onClick={() => { setStep(STEPS.WELCOME); setName(""); setGradYear(""); setDegree(""); setIdentity([]); setLocation(""); setInterests([]); setInvolvement([]); setCareer(""); setHistory([]); }}
+                <button onClick={() => { setStep(STEPS.WELCOME); setName(""); setGradYear(""); setDegree(""); setSchool(""); setIdentity([]); setLocation(""); setInterests([]); setInvolvement([]); setCareer(""); setHistory([]); }}
                   style={{ padding: "11px 20px", borderRadius: 6, border: "2px solid #D4D9E1", background: COLORS.white, fontSize: 13, fontFamily: "'Inter', sans-serif", cursor: "pointer", color: "#718096", fontWeight: 500 }}>↺ start over</button>
               </div>
               <a href="https://account.alumni.ucla.edu/" target="_blank" rel="noopener noreferrer"
